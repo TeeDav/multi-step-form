@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+    <link rel="stylesheet" href="/style.css">
+  
+  <title>Frontend Mentor | Multi-step form</title>
+
+  <script type="" src="scripts/main.js"></script>
+
+  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+  <style>
+    /* .attribution { font-size: 11px; text-align: center; } */
+    .attribution a { color: hsl(228, 45%, 44%); }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <aside>
+      <div class="side">
+        <!-- <img class="side" src="./assets/images/bg-sidebar-desktop.svg" alt=""> -->
+         <div class="side-child">
+            <div class="number"><p>1</p></div>
+            <div class="desc">
+              <p>STEP 1</p>
+              <p>YOUR INFO</p>
+            </div>
+         </div>
+        <div class="side-child">
+          <div class="number"><p>2</p></div>
+          <div class="desc">
+            <p>STEP 2</p>
+            <p>SELECT PLAN</p>
+          </div>
+        </div>
+        <div class="side-child">
+          <div class="number"><p>3</p></div>
+          <div class="desc">
+            <p>STEP 3</p>
+            <p>ADD-ONS</p>
+          </div>
+        </div>
+        <div class="side-child">
+          <div class="number"><p>4</p></div>
+          <div class="desc">
+            <p>STEP 4</p>
+            <p>SUMMARY</p>
+          </div>
+        </div>
+      </div>
+    </aside>
+    <div class="container-body">
+      <div class="container-child">
+        <header>
+          <h1 class="heading">Finishing Up</h1>
+          <p class="notes notes-margin">Double-check everything looks OK before confirming</p>
+        </header>
+
+        <!-- plans -->
+        <section>
+            <div class="arcade-section">
+                <div class="arcade-card">
+                    <div class="arcade-copy">
+                      <div class="arcade-plan">
+                        <p class="notes">Arcade (Monthly)</p>
+                        <p class="notes">Change</p>
+                      </div>
+                      <p class="notes">$9/mo</p>
+                    </div>
+                    <div class="arcade-copy">
+                        <p class="notes">Online service</p>
+                        <p class="notes">+$1/mo</p>
+                    </div>
+                    <div class="arcade-copy">
+                        <p class="notes">Larger storage</p>
+                        <p class="notes">+$2/mo</p>
+                    </div>
+                </div>
+
+                <div class="arcade-total">
+                  <p class="notes">Total (per month)</p>
+                  <p class="notes">+$12/mo</p>
+                </div>
+                
+            </div>
+        </section>
+
+        <nav>
+          <div class="buttons">
+            <button><p class="notes" onclick="location.href = './pick add-ons.html'">Go Back</p></button>
+            <button class="confirm"><p class="notes" id="next" onclick="location.href = './pick add-ons.html'" >Confirm</p></button>
+          </div>
+        </nav>
+        
+      </div>
+    </div>
+    
+  </div>
+  <!-- <div class="button">
+    <p class="notes"></p>
+    <p class="notes"></p>
+  </div>
+  /* side img section */
+  <section></section> -->
+</body>
+</html>
