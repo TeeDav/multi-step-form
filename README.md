@@ -6,4 +6,4 @@
 
 This is my implementation of a [Frontend Mentor](https://www.frontendmentor.io) coding challenge - Multi-step form
 
-**I'm getting my hands dirty with Js Modules. You'll find a lot of them here** 🚀
+**I'm getting my hands dirty with Js Modules, you'll find a lot of them here** 🚀
