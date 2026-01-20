@@ -1,5 +1,5 @@
 import { header } from "../components/header.js";
-import { addHeaderSectionClass } from "../app.js";
+import { addHeaderSectionClass } from "../test/app.js";
 
 const headerClass = [
     'header_anim',

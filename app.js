@@ -2,7 +2,7 @@ import { createSide } from "./components/sidebar.js";
 import { navBar } from "./components/navBar.js";
 import { header } from "./components/header.js";
 import { infoPage } from "./pages/infoPage.js";
-import { selectPlanPage } from "./pages/selectPlanPage.js";
+// import { selectPlanPage } from "./pages/selectPlanPage.js";
 
 import animation_ from "./animations/pageTransitions.js";
 

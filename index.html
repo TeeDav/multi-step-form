@@ -1,104 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
 
-  <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-  <link rel="stylesheet" href="/style.css">
-  
-  <title>Frontend Mentor | Multi-step form</title>
-
-  <script type="" src="scripts/main.js"></script>
-
-  <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
-  <style>
-    /* .attribution { font-size: 11px; text-align: center; } */
-    .attribution a { color: hsl(228, 45%, 44%); }
-  </style>
+    <link rel="stylesheet" href="../style.css">
 </head>
-
 <body>
-  <div class="container">
-    <aside>
-      <div class="side">
-        <!-- <img class="side" src="./assets/images/bg-sidebar-desktop.svg" alt=""> -->
-         <div class="side-child">
-            <div class="number"><p>1</p></div>
-            <div class="desc">
-              <p>STEP 1</p>
-              <p>YOUR INFO</p>
-            </div>
-         </div>
-        <div class="side-child">
-          <div class="number"><p>2</p></div>
-          <div class="desc">
-            <p>STEP 2</p>
-            <p>SELECT PLAN</p>
-          </div>
+    <div class="container" id="container-root">
+        <aside>
+            <div id="sidebar-root"></div>
+        </aside>
+        <div class="container-body" id="container-body-root">
+            <!-- 'container-child' contains header, section, and nav -->
+            <div class="container-child" id="container-child"></div>
         </div>
-        <div class="side-child">
-          <div class="number"><p>3</p></div>
-          <div class="desc">
-            <p>STEP 3</p>
-            <p>ADD-ONS</p>
-          </div>
-        </div>
-        <div class="side-child">
-          <div class="number"><p>4</p></div>
-          <div class="desc">
-            <p>STEP 4</p>
-            <p>SUMMARY</p>
-          </div>
-        </div>
-      </div>
-    </aside>
-    <div class="container-body">
-      <div class="container-child">
-        <header>
-          <h1 class="heading">Personal info</h1>
-          <p class="notes notes-margin">Please provide your name, email address, and phone number.</p>
-        </header>
-
-        <!-- plans -->
-        
-        <section>
-          <div class="form-container notes">
-            <form action="pages/select-your-plan.html">
-              <div class="form-control">
-                <label for="name">Name</label>
-                <input type="text" name="name" placeholder="e.g. Stephen King">
-              </div>
-              <div class="form-control">
-                <label for="email">Email Address</label>
-                <input type="email" name="email" id="" placeholder="e.g. stephenking@lorem.com">
-              </div>
-              <div class="form-control">
-                <label for="phone">Phone Number</label>
-                <input type="text" name="phone" id="" placeholder="e.g. +1 234 567 890">
-              </div>
-            </form>
-          </div>
-        </section>
-
-        <nav>
-          <div class="buttons">
-            <button><p class="notes" onclick="location.href = './select-your-plan.html'"></p></button>
-            <button onclick="location.href = './test/test.html'"><p class="notes" id="next">Next Step</p></button>
-          </div>
-        </nav>
-        
-      </div>
+        <main id="main-content"></main>
     </div>
-    
-  </div>
-  <!-- <div class="button">
-    <p class="notes"></p>
-    <p class="notes"></p>
-  </div>
-  /* side img section */
-  <section></section> -->
-</body>
+  
+  <script type="module" src="app.js"></script>
+  <!-- <script type="module" src="/animations/pageTransitions.js"></script> -->
 
+</body>
 </html>
