@@ -55,7 +55,7 @@ window.addEventListener('navigate', (e) => {
 
     const pageList = [
         infoPage(),
-        selectPlanPage(),
+        selectPlanPage().section,
         addOnsPage()
     ]
 
@@ -76,17 +76,19 @@ window.addEventListener('navigate', (e) => {
     switch(e.detail) {
         case 1: //render infoPage
             containerChild.appendChild(infoPage())
-            animation_.InfoPageAnimIn(infoPage().getAttribute("id"))
+            animation_.pageAnimIn(infoPage().getAttribute("id"))
             break;
         case 2:
             console.log('page2')
             //const removeInfo = document.getElementById(infoPage().getAttribute("id"))
             //console.log(removeInfo.remove())
             //removeInfo.remove() ? console.log('removed') : console.log('not removed')
-            containerChild.appendChild(selectPlanPage())
+            containerChild.appendChild(selectPlanPage().section)
+            animation_.pageAnimIn(selectPlanPage().section.getAttribute("id"))
             break;
         case 3:
             containerChild.appendChild(addOnsPage())
+            animation_.pageAnimIn(addOnsPage().getAttribute("id"))
             break;
         case 'step4':
             main.innerHTML = '<h1>Step 4: Summary</h1>';

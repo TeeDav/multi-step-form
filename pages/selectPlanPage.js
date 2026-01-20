@@ -2,7 +2,7 @@ function selectPlanPage (){
     const section = document.createElement('section');
     section.id = 'select-plan'
     section.classList.add('anim')
-    // section.classList.add('noshow')
+    section.classList.add('noshow')
 
     // container equivalent
     const containerBody = document.createElement('div')
@@ -23,8 +23,11 @@ function selectPlanPage (){
         { name: 'Pro', price: '$15/mo' }
     ]
 
+    let cardArr = []
+
     plans.forEach((plan, i) => {
         const card = document.createElement('div')
+        cardArr.push(card)
         card.classList = 'card'
         card.setAttribute('tabindex', '0')
         if (i === 0) card.id = 'card'
@@ -95,7 +98,74 @@ function selectPlanPage (){
     containerBody.appendChild(containerChild)
     section.appendChild(sectionNode)
 
-    return section
+
+    //
+
+    console.log(cardArr)
+
+    let extended = false;
+    // console.log(showPlans);
+    // console.log(card);
+    // console.log(toggleSwitch);
+
+    childToggle.addEventListener("click", function (e) {
+        // console.log('yes');
+        if (extended == false) {
+            for(let i=0; i<cardArr.length; i++) {
+                cardArr[i].style.height = "190px";
+            }
+            ball.style.left = "17px";
+            // toggleSwitch.style.justifyContent = "flex-end";
+            // toggle[0].style.marginLeft = "14px";
+            
+            extended = true;
+
+        } else {
+            for(let i=0; i<cardArr.length; i++) {
+                cardArr[i].style.height = "161px";
+            }
+            ball.style.left = "0px";
+            // toggleSwitch.style.justifyContent = "flex-start";
+            // toggle[0].style.marginLeft = "4px";
+            // toggle[0].style.transition - "margin-left 300ms ease-in";
+            
+            extended = false;
+        }
+        
+    })
+
+    let storeFocus;
+    let keepFocus;
+
+    for(let i=0; i<cardArr.length; i++) {
+        let u = i;
+        let z;
+        cardArr[i].addEventListener("click", function (e) {
+            cardArr[u].classList.add('focused');
+            console.log(e.target)
+            storeFocus = e.target;
+            e.stopPropagation();
+            keepFocus = document.activeElement; //the element that has focus in the browser
+            console.log(keepFocus);
+            for (z=0; z<cardArr.length; z++) {
+                cardArr[z].classList.remove('focused');
+                if (u == z) {
+                    cardArr[z].classList.add('focused');
+                }
+            }
+        }, false);     
+    }
+
+
+    document.body.addEventListener("click", function (e){
+            keepFocus = document.activeElement;
+            console.log(storeFocus);
+            //keepFocus.classList.add('focused');      
+    }, false)
+
+    //
+
+    return { section, childToggle, cardArr, toggle  }
 }
 
 export { selectPlanPage }

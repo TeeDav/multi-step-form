@@ -3,8 +3,8 @@ import { addOn } from "../components/addOn.js";
 function addOnsPage() {
     const addOnSection = document.createElement('section');
     addOnSection.id = "add-on-section"
-    // bodySection.classList.add("anim")
-    // bodySection.classList.add("noshow")
+    addOnSection.classList.add("anim")
+    addOnSection.classList.add("noshow")
 
     const addOnBody = document.createElement('div')
     addOnBody.classList = 'add-ons-body'

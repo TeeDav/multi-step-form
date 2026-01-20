@@ -26,7 +26,7 @@ const headerClass = [
 
 // animIn(infoPage().getAttribute("id"))
 const animation_ = {
-    InfoPageAnimIn(pag)  {
+    pageAnimIn(pag)  {
         const pageName = document.getElementById(pag)
         // pageName.classList.add('hide');
 
