@@ -2,7 +2,7 @@ function selectPlanPage (){
     const section = document.createElement('section');
     section.id = 'select-plan'
     section.classList.add('anim')
-    section.classList.add('noshow')
+    // section.classList.add('noshow')
 
     // container equivalent
     const containerBody = document.createElement('div')
@@ -10,17 +10,6 @@ function selectPlanPage (){
 
     const containerChild = document.createElement('div')
     containerChild.classList = 'container-child'
-
-    // Header
-    const header = document.createElement('header')
-    const h1 = document.createElement('h1')
-    h1.classList = 'heading'
-    h1.innerText = 'Select your plan'
-    const pNotes = document.createElement('p')
-    pNotes.classList = 'notes notes-margin'
-    pNotes.innerText = 'You have the option of monthly or yearly billing.'
-    header.appendChild(h1)
-    header.appendChild(pNotes)
 
     // Plans (cards)
     const sectionNode = document.createElement('section')
@@ -96,39 +85,15 @@ function selectPlanPage (){
     planSwitchWrap.appendChild(childToggle)
     planSwitchWrap.appendChild(childYearly)
 
-    // Navigation buttons
-    const nav = document.createElement('nav')
-    const buttons = document.createElement('div')
-    buttons.classList = 'buttons'
-
-    const goBackBtn = document.createElement('button')
-    const goBackP = document.createElement('p')
-    goBackP.classList = 'notes'
-    goBackP.innerText = 'Go Back'
-    goBackP.onclick = function () { location.href = '../index.html' }
-    goBackBtn.appendChild(goBackP)
-
-    const nextBtn = document.createElement('button')
-    nextBtn.id = 'next'
-    const nextP = document.createElement('p')
-    nextP.classList = 'notes'
-    nextP.innerText = 'Next Step'
-    nextP.onclick = function () { location.href = './pick add-ons.html' }
-    nextBtn.appendChild(nextP)
-
-    buttons.appendChild(goBackBtn)
-    buttons.appendChild(nextBtn)
-    nav.appendChild(buttons)
-
     // Assemble
     sectionNode.appendChild(cardsWrap)
     sectionNode.appendChild(planSwitchWrap)
 
-    containerChild.appendChild(header)
+    // containerChild.appendChild(header)
     containerChild.appendChild(sectionNode)
-    containerChild.appendChild(nav)
+    // containerChild.appendChild(nav)
     containerBody.appendChild(containerChild)
-    section.appendChild(containerBody)
+    section.appendChild(sectionNode)
 
     return section
 }

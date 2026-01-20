@@ -2,7 +2,8 @@ import { createSide } from "./components/sidebar.js";
 import { navBar } from "./components/navBar.js";
 import { header } from "./components/header.js";
 import { infoPage } from "./pages/infoPage.js";
-// import { selectPlanPage } from "./pages/selectPlanPage.js";
+import { selectPlanPage } from "./pages/selectPlanPage.js";
+import { addOnsPage } from "./pages/pickAddons.js";
 
 import animation_ from "./animations/pageTransitions.js";
 
@@ -50,7 +51,23 @@ window.addEventListener('navigate', (e) => {
 
     const main = document.getElementById('main-content')
 
-    console.log(containerChild.querySelector('section[id]'))
+    console.log(containerChild)
+
+    const pageList = [
+        infoPage(),
+        selectPlanPage(),
+        addOnsPage()
+    ]
+
+    //console.log(document.getElementById(pageList[1].getAttribute("id")))
+
+    pageList.forEach(page => {
+        const pageId = document.getElementById(page.getAttribute("id"))
+        if (containerChild.contains(pageId)) {
+            pageId.remove()
+        }
+    })
+
     // const oldPage = containerChild.querySelector('section[id]');
     // if (oldPage) oldPage.remove();
  
@@ -62,10 +79,14 @@ window.addEventListener('navigate', (e) => {
             animation_.InfoPageAnimIn(infoPage().getAttribute("id"))
             break;
         case 2:
-            // containerChild.appendChild(selectPlanPage())
+            console.log('page2')
+            //const removeInfo = document.getElementById(infoPage().getAttribute("id"))
+            //console.log(removeInfo.remove())
+            //removeInfo.remove() ? console.log('removed') : console.log('not removed')
+            containerChild.appendChild(selectPlanPage())
             break;
-        case 'step3':
-            main.innerHTML = '<h1>Step 3: Add-ons</h1>';
+        case 3:
+            containerChild.appendChild(addOnsPage())
             break;
         case 'step4':
             main.innerHTML = '<h1>Step 4: Summary</h1>';

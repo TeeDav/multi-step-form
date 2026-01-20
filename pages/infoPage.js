@@ -81,10 +81,13 @@ function infoPage (){
 
             console.log(inputAttrsObj)
 
-            for (let [u, v] of inputAttrsObj){
-                inputField.setAttribute(u, v)
-            }
-            
+            //set placeholder value
+            inputAttrs.forEach(inputAttr => {
+                const inputAttrsObj = Object.entries(inputAttr)
+                for (let [u, v] of inputAttrsObj){
+                    inputField.setAttribute(u, v)
+                }
+            })
 
             formControl = document.createElement('div')
             formControl.id = 'formId'

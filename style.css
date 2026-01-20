@@ -621,6 +621,10 @@ header {
     font-weight: normal;
     letter-spacing: -0.02em;
 }
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
     
 .anim {
     transition: opacity 300ms linear, transform 840ms cubic-bezier(0.075, 0.82, 0.165, 1);
