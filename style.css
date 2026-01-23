@@ -232,7 +232,7 @@ body {
 
 .focused {
     background-color: hsl(217, 100%, 97%);
-    border: solid 1px hsl(243, 100%, 62%);
+    border: solid 1px hsl(243, 100%, 62%) !important;
 }
 
 /* .card:before {
@@ -444,8 +444,9 @@ header {
 }
 
 .add-ons:focus, .add-ons:focus-visible {
-    background-color: hsl(230deg 75% 98.43%);
-    border: solid 1px hsl(243, 100%, 62%);
+    /* background-color: hsl(230deg 75% 98.43%); */
+    /* background-color: hsl(217, 100%, 97%);
+    border: solid 1px hsl(243, 100%, 62%); */
 }
 
 
@@ -624,6 +625,7 @@ header {
 
 input[type="checkbox"] {
     cursor: pointer;
+    /* z-index: -1; */
 }
     
 .anim {
@@ -645,8 +647,12 @@ input[type="checkbox"] {
 }
  
 .header_pre {
-    opacity: 0;
+    opacity: 1;
     transform: translateY(45px)
+}
+
+.blink {
+    opacity: 0;
 }
     
     

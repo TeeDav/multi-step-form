@@ -12,6 +12,8 @@ import animation_ from "./animations/pageTransitions.js";
 const containerChild = document.getElementById('container-child');
 let headerSection
 
+let headerId = header().headerSection.id
+
 document.addEventListener('DOMContentLoaded', () => {
     
     // Render sidebar
@@ -26,7 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //animation_.HeaderAnim(header().headerSection.getAttribute("id"))
     containerChild.appendChild(header().headerSection);
     console.log(header().headerSection.id)
-    let headerId = header().headerSection.id
+    
     headerSection = document.getElementById('header')
     // headerSection.classList.add('addClass')
     animation_.headerClassAdd() ? console.log('done') : console.log('not done')
@@ -46,6 +48,9 @@ function addHeaderSectionClass(addClass) {
 //listen for the 'navigate' event and change content
 window.addEventListener('navigate', (e) => {
     
+    // animation_.headerClassAdd()
+    // animation_.HeaderAnim(headerId)
+
     const pageArr = []
     //pageArr.push = e.detail
 
@@ -90,8 +95,8 @@ window.addEventListener('navigate', (e) => {
             containerChild.appendChild(addOnsPage())
             animation_.pageAnimIn(addOnsPage().getAttribute("id"))
             break;
-        case 'step4':
-            main.innerHTML = '<h1>Step 4: Summary</h1>';
+        case 4:
+            
             break;
         default:
             console.log(containerChild.lastElementChild)

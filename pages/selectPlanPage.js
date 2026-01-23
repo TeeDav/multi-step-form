@@ -158,10 +158,10 @@ function selectPlanPage (){
 
 
     document.body.addEventListener("click", function (e){
-            keepFocus = document.activeElement;
-            console.log(storeFocus);
+            //keepFocus = document.activeElement;
+            //console.log(storeFocus);
             //keepFocus.classList.add('focused');      
-    }, false)
+    })
 
     //
 

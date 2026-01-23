@@ -40,9 +40,50 @@ function addOn([headNote, subNote, perMonth]) {
     addOn.appendChild(addOnCopy)
     addOn.appendChild(amountDiv)
 
-    addOn.addEventListener('click', function(e) {
+    let summary = {
+        'perk_1': '',
+        'perk_2': ''
+    }
+    localStorage.setItem('summaryStore', summary)
+
+    addOn.addEventListener('click', (e) => {
         checkInput.checked = !checkInput.checked
+        if (addOn.classList.contains('focused')) {
+            addOn.classList.remove('focused');
+        }
+        else if (!addOn.classList.contains('focused')) {
+            addOn.classList.add('focused');
+        }
+        
+        if (checkInput.checked == true) {
+            console.log(checkInput.parentElement.parentElement)
+            console.log(headNote)
+            console.log(perMonth)
+
+            summary.perk_1 = headNote
+
+            console.log(summary)
+
+            //window.dispatchEvent(new CustomEvent('summary', { detail: u}))
+        }
     })
+    
+
+    checkInput.addEventListener('click', (e) => {
+        console.log(checkInput.parentElement.parentElement)
+        // const addOnCheck = checkInput.parentElement.parentElement
+        // if (addOnCheck.classList.contains('focused')) {
+        //     addOnCheck.classList.remove('focused');
+        // }
+        // else if (!addOnCheck.classList.contains('focused')) {
+        //     addOnCheck.classList.add('focused');
+        // }
+        //checkInput.checked = !checkInput.checked
+    })
+
+    if (checkInput.checked == true) {
+        console.log('checked')
+    }
 
     return addOn;
 }

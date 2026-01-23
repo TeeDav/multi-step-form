@@ -3,7 +3,8 @@ import { addHeaderSectionClass } from "../app.js";
 
 const headerClass = [
     'header_anim',
-    'header_pre'
+    'header_pre',
+    //'blink'
 ]
 
 // console.log(header().headerSection().getAttribute("id"))
@@ -35,6 +36,17 @@ const animation_ = {
         }, 100)
     },
 
+    blink(pag)  {
+        const pageName = document.getElementById(pag)
+        pageName.classList.add('blink')
+        // pageName.classList.add('hide');
+
+        setTimeout(() => {
+            pageName.classList.remove('blink');
+        }, 100)
+    },
+
+
     headerClassAdd() {
         headerClass.forEach(class_ => {
             header().addHeaderClass(class_)
@@ -50,7 +62,9 @@ const animation_ = {
         setTimeout(() => {
             pageName.classList.remove('header_pre');
         }, 10)
-    }    
+    },
+    
+    
 }
 
 export default animation_
