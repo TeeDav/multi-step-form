@@ -4,6 +4,7 @@ import { header } from "./components/header.js";
 import { infoPage } from "./pages/infoPage.js";
 import { selectPlanPage } from "./pages/selectPlanPage.js";
 import { addOnsPage } from "./pages/pickAddons.js";
+import { finishingUp } from "./pages/finishingUp.js";
 
 import animation_ from "./animations/pageTransitions.js";
 
@@ -36,7 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //dispatch the navigate event so that the infoPage() renders
     window.dispatchEvent(new CustomEvent('navigate', { detail: 1}))
-    
 });
 
 function addHeaderSectionClass(addClass) {
@@ -45,8 +45,10 @@ function addHeaderSectionClass(addClass) {
         console.log(headerSection)
 }
 
-//listen for the 'navigate' event and change content
+//Router. listen for the 'navigate' event and change app content
 window.addEventListener('navigate', (e) => {
+
+    // delay().lazyLoading(containerChild)
     
     // animation_.headerClassAdd()
     // animation_.HeaderAnim(headerId)
@@ -58,17 +60,26 @@ window.addEventListener('navigate', (e) => {
 
     console.log(containerChild)
 
-    const pageList = [
+    //console.log(document.getElementById(pages[1].getAttribute("id")))
+
+
+    const pages = [
         infoPage(),
         selectPlanPage().section,
-        addOnsPage()
+        addOnsPage(),
+        finishingUp().sectionId
     ]
 
-    //console.log(document.getElementById(pageList[1].getAttribute("id")))
-
-    pageList.forEach(page => {
-        const pageId = document.getElementById(page.getAttribute("id"))
+    //holdOn
+    pages.forEach(page => {
+        console.log(typeof(page))
+        // let pageObj = page.concat('()')
+        // console.log(document.getElementById(page) || document.getElementById(eval(page).getAttribute('id')))
+        let pageId
+        typeof(page) == 'object' ? pageId = document.getElementById(eval(page).getAttribute('id')) 
+        : pageId = document.getElementById(page)
         if (containerChild.contains(pageId)) {
+            console.log('yes')
             pageId.remove()
         }
     })
@@ -88,6 +99,7 @@ window.addEventListener('navigate', (e) => {
             //const removeInfo = document.getElementById(infoPage().getAttribute("id"))
             //console.log(removeInfo.remove())
             //removeInfo.remove() ? console.log('removed') : console.log('not removed')
+            
             containerChild.appendChild(selectPlanPage().section)
             animation_.pageAnimIn(selectPlanPage().section.getAttribute("id"))
             break;
@@ -96,6 +108,10 @@ window.addEventListener('navigate', (e) => {
             animation_.pageAnimIn(addOnsPage().getAttribute("id"))
             break;
         case 4:
+            console.log(e.detail)
+            containerChild.appendChild(finishingUp().section)
+            animation_.pageAnimIn(finishingUp().sectionId)
+            break;
             
             break;
         default:

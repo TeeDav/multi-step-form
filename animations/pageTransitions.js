@@ -49,7 +49,7 @@ const animation_ = {
 
     headerClassAdd() {
         headerClass.forEach(class_ => {
-            header().addHeaderClass(class_)
+            header()?.addHeaderClass(class_)
         })
     },
 
