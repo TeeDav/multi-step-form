@@ -34,7 +34,7 @@ function navBar () {
     nav.appendChild(navChild);
     // console.log(navChild);
 
-    const pageLen = pages.length;
+    const pageLen = pages.length + 1;
     let u = 1;
     
     //create the custom 'navigate' event

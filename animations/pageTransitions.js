@@ -43,7 +43,7 @@ const animation_ = {
 
         setTimeout(() => {
             pageName.classList.remove('blink');
-        }, 100)
+        }, 117)
     },
 
 

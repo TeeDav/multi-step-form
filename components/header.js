@@ -58,9 +58,13 @@ function header (){
         subHeading.innerText = ''
         
         setTimeout(() => {
-            heading.innerText = headerCopy[w][0]
-            subHeading.innerText = headerCopy[w][1]
-            // headerSection.classList.remove('blink');
+            console.log(headerCopy.length)
+            if (w <= (headerCopy.length - 1)) {
+                heading.innerText = headerCopy[w][0]
+                subHeading.innerText = headerCopy[w][1]
+                // headerSection.classList.remove('blink');
+            }
+            else return
         }, 117)
     })
 
