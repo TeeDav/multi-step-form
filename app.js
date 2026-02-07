@@ -8,8 +8,8 @@ import { finishingUp } from "./pages/finishingUp.js";
 import { thankYou } from "./pages/thankYou.js";
 
 import animation_ from "./animations/pageTransitions.js";
-
-
+import { infoValidation } from "./validation/infoValidation.js";
+infoValidation()
 
 // const check = animation_
 const container = document.getElementById('container-root');
@@ -40,6 +40,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //dispatch the navigate event so that the infoPage() renders
     window.dispatchEvent(new CustomEvent('navigate', { detail: 1}))
+    window.dispatchEvent(new CustomEvent('validation', { detail: 1}))
 });
 
 function addHeaderSectionClass(addClass) {

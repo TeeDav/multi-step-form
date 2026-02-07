@@ -617,7 +617,16 @@ header {
 }
 
 .form-control label, .form-control input {
-    display: block;
+    display: inline;
+}
+
+ .error-message {
+    display: inline;
+    /* justify-self: right; */
+    /* text-align: right; */
+    position: absolute;
+    right: 0px;
+    color: hsl(354, 84%, 57%);
 }
 
 .form-container input {
@@ -636,7 +645,7 @@ header {
         font-size: 16px !important;
     }
     &:hover, &:focus {
-        border-color: hsl(243, 100%, 62%) !important;
+        border-color: hsl(243, 100%, 62%);
     }
     &:focus-visible {
         outline: none;
@@ -649,6 +658,14 @@ header {
     font-weight: normal;
     letter-spacing: -0.02em;
 }
+
+.error {
+    border-color: hsl(354, 84%, 57%) !important;
+}
+
+.error:hover, .error:focus {
+        border-color: hsl(354, 84%, 57%) !important;
+    }
 
 input[type="checkbox"] {
     cursor: pointer;

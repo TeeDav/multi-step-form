@@ -34,6 +34,12 @@ function infoPage (){
         }
     ]
 
+    const errorId = [
+        'nameErr',
+        'emailErr',
+        'phoneErr'
+    ]
+
     const labelCopyObj = Object.entries(labelCopy)
     // const labelAttrsObj = Object.entries(labelAttrs)
     const inputAttrsObj = Object.entries(inputAttrs)
@@ -41,6 +47,7 @@ function infoPage (){
     let formControl = ''
     let inputField = ''
     let inputLabel = ''
+    let errorMessage = ''
 
     //create input field
     
@@ -70,30 +77,45 @@ function infoPage (){
             
 
             inputLabel = document.createElement('label')
-                        
+
+            errorMessage = document.createElement('div')
+            errorMessage.classList.add('error-message')
+            errorMessage.classList.add('notes')
+            // errorMessage.textContent = 'This field is required'     
+            
+            errorMessage.setAttribute('id', errorId[k])
 
             // inputLabel.setAttribute('for', labelAttrs[k])
             console.log(labelAttrs[k])
             inputLabel.setAttribute('for', labelAttrs[k])
             inputLabel.innerText = v
 
-            const inputAttrsObj = Object.entries(inputAttrs[k])
+            //const inputAttrsObj = Object.entries(inputAttrs[k])
 
             console.log(inputAttrsObj)
 
+            let attrsIterate = Object.entries(inputAttrs[k])
             //set placeholder value
-            inputAttrs.forEach(inputAttr => {
-                const inputAttrsObj = Object.entries(inputAttr)
-                for (let [u, v] of inputAttrsObj){
-                    inputField.setAttribute(u, v)
-                }
-            })
+            for (let [a, b] of attrsIterate){
+                console.log(a + ': ' + b)
+                inputField.setAttribute(a, b)
+            }
+
+
+            // inputAttrs.forEach(inputAttr => {
+            //     const inputAttrsObj = Object.entries(inputAttr)
+            //     for (let [a, b] of inputAttrsObj){
+            //         console.log(a + ': ' + b)
+            //         inputField.setAttribute(a, b)
+            //     }
+            // })
 
             formControl = document.createElement('div')
             formControl.id = 'formId'
             formControlId = document.getElementById(formControl.id)
             formControl.classList = 'form-control'
             formControl.append(inputLabel)
+            formControl.append(errorMessage)
             formControl.appendChild(inputField)
 
             
@@ -149,12 +171,6 @@ function infoPage (){
     //     inputField.setAttribute(k, v)
     //     formControl.appendChild
     // })
-    
-
-    
-    
-    
-
     return bodySection;
 }
 
