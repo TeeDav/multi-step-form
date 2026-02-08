@@ -1,23 +1,7 @@
-export function infoValidation () {
-    //validation 
-    // Returns true/false
-    function validateEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        const valid = re.test(String(email).toLowerCase().trim());
-        return valid
-    }
+import { Validator } from "./validationHelper.js";
+import { validationScrits } from "./validationScripts.js";
 
-    // Returns { valid: boolean, normalized: string }
-    function validatePhone(phone, { minDigits = 7, maxDigits = 15 } = {}) {
-        if (typeof phone !== 'string') return { valid: false, normalized: '' };
-        const trimmed = phone.trim();
-        const hasPlus = trimmed.startsWith('+');
-        const digitsOnly = trimmed.replace(/[^\d]/g, '');
-        const len = digitsOnly.length;
-        const valid = len >= minDigits && len <= maxDigits;
-        return { valid, normalized: (hasPlus ? '+' : '') + digitsOnly };
-    }
-    
+function infoValidation () {
     window.addEventListener('validation', () => {
         
         console.log('hi')
@@ -28,98 +12,109 @@ export function infoValidation () {
         const phoneInput = document.querySelector('input[name="phone"]');
         const errorBox = document.querySelector('.error-message')
 
+
+        const validatePhone = new Validator([
+            '#phoneErr', //msgId
+            phoneInput, //inputBox
+            'error', //errClass
+            'Please enter a valid phone number', //errMsg
+            validationScrits.validatePhone //function that will perform validation
+        ])
+
+        validatePhone.validate()
+
         // valid()
 
         // emailInput.focusin = console.log('yay')
-        emailInput.addEventListener('focusout', () => {
-            console.log('focus-out')
-            const email = emailInput.value;
-            console.log(email)
+        // emailInput.addEventListener('focusout', () => {
+        //     console.log('focus-out')
+        //     const email = emailInput.value;
+        //     console.log(email)
 
-            if(!(email == '')) {
-                if (!validateEmail(email)) {
-                    document.querySelector('#emailErr').textContent = 'Please enter a valid email address.';
-                    // errorBox.classList.add('error');
-                    // emailInput.focus();
-                    emailInput.classList.add('error')
-                    // email.style.hover.borderColor = 'green'
-                    return;
-                } else if (validateEmail(email)) {
-                    document.querySelector('#emailErr').textContent = '';
-                    if (emailInput.classList.contains('error')) {
-                        emailInput.classList.remove('error')
-                    }
-                }
+        //     if(!(email == '')) {
+        //         if (!validateEmail(email)) {
+        //             document.querySelector('#emailErr').textContent = 'Please enter a valid email address.';
+        //             // errorBox.classList.add('error');
+        //             // emailInput.focus();
+        //             emailInput.classList.add('error')
+        //             // email.style.hover.borderColor = 'green'
+        //             return;
+        //         } else if (validateEmail(email)) {
+        //             document.querySelector('#emailErr').textContent = '';
+        //             if (emailInput.classList.contains('error')) {
+        //                 emailInput.classList.remove('error')
+        //             }
+        //         }
 
-                // Valid — you can use phoneRes.normalized and email
-                console.log('Email valid:', email);
-            } else return
-        })
+        //         // Valid — you can use phoneRes.normalized and email
+        //         console.log('Email valid:', email);
+        //     } else return
+        // })
         
         //id of error message
         //input box
         //error class
         //error message
 
-        function showPhoneErr() {
-            document.querySelector('#phoneErr').textContent = 'Please enter a valid phone number.';
-            phoneInput.classList.add('error')
-        }
+        // function showPhoneErr() {
+        //     document.querySelector('#phoneErr').textContent = 'Please enter a valid phone number.';
+        //     phoneInput.classList.add('error')
+        // }
 
-        function removePhoneErr () {
-            document.querySelector('#phoneErr').textContent = '';
-            if (phoneInput.classList.contains('error')) {
-                phoneInput.classList.remove('error')
-            }
-        }
+        // function removePhoneErr () {
+        //     document.querySelector('#phoneErr').textContent = '';
+        //     if (phoneInput.classList.contains('error')) {
+        //         phoneInput.classList.remove('error')
+        //     }
+        // }
 
-        phoneInput.addEventListener('keyup', () => {
-            let phone = phoneInput.value;
-            console.log(phone)
+        // phoneInput.addEventListener('keyup', () => {
+        //     let phone = phoneInput.value;
+        //     console.log(phone)
 
-            if(!(phone == '')) {
-                const phoneRes = validatePhone(phone);
+        //     if(!(phone == '')) {
+        //         const phoneRes = validatePhone(phone);
 
-                if (!phoneRes.valid) {
-                        if (phoneRes.valid) {   
-                        removePhoneErr()
-                        return
-                    }  
+        //         if (!phoneRes.valid) {
+        //                 if (phoneRes.valid) {   
+        //                 removePhoneErr()
+        //                 return
+        //             }  
 
-                    phoneInput.addEventListener('focusout', () => {
-                        showPhoneErr()
-                    })
+        //             phoneInput.addEventListener('focusout', () => {
+        //                 showPhoneErr()
+        //             })
                     
-                    console.log('here')
-                    return;
-                } else if (phoneRes.valid) {
+        //             console.log('here')
+        //             return;
+        //         } else if (phoneRes.valid) {
 
-                    if (!phoneRes.valid) {    
-                        showPhoneErr()
-                        return
-                    }
+        //             if (!phoneRes.valid) {    
+        //                 showPhoneErr()
+        //                 return
+        //             }
 
-                    removePhoneErr()
-                    phoneInput.addEventListener('focusout', () => {
-                        removePhoneErr()
-                    })
-                    return
-                }                    
-                // Valid — you can use phoneRes.normalized and email
-                console.log('Phone normalized:', phoneRes.normalized);
-                return
-            } else if(phone == '') {
-                phone = ''
-                document.querySelector('#phoneErr').textContent = '';
-                if (phoneInput.classList.contains('error') || !(phoneInput.classList.contains('error'))) {
-                    phoneInput.classList.remove('error')
-                }
-                phoneInput.addEventListener('focusout', () => {
-                    removePhoneErr()
-                })
-                return
-            }
-        })
+        //             removePhoneErr()
+        //             phoneInput.addEventListener('focusout', () => {
+        //                 removePhoneErr()
+        //             })
+        //             return
+        //         }                    
+        //         // Valid — you can use phoneRes.normalized and email
+        //         console.log('Phone normalized:', phoneRes.normalized);
+        //         return
+        //     } else if(phone == '') {
+        //         phone = ''
+        //         document.querySelector('#phoneErr').textContent = '';
+        //         if (phoneInput.classList.contains('error') || !(phoneInput.classList.contains('error'))) {
+        //             phoneInput.classList.remove('error')
+        //         }
+        //         phoneInput.addEventListener('focusout', () => {
+        //             removePhoneErr()
+        //         })
+        //         return
+        //     }
+        // })
 
         // phoneInput.addEventListener('focusout', () => {
         //     const phone = phoneInput.value;
@@ -151,36 +146,38 @@ export function infoValidation () {
 
         
         
-        window.addEventListener('navigate', (e) => {
-            console.log('validation')
-            if (e.detail == 2) {
-                console.log('validated')
-                e.preventDefault();
-            const email = emailInput?.value;
-            const phone = phoneInput?.value;
+        // window.addEventListener('navigate', (e) => {
+        //     console.log('validation')
+        //     if (e.detail == 2) {
+        //         console.log('validated')
+        //         e.preventDefault();
+        //     const email = emailInput?.value;
+        //     const phone = phoneInput?.value;
 
-            console.log(emailInput)
+        //     console.log(emailInput)
 
-            if (!validateEmail(email)) {
-            errorBox.textContent = 'Please enter a valid email address.';
-            errorBox.classList.add('error');
-            emailInput.focus();
-            return;
-            }
+        //     if (!validateEmail(email)) {
+        //     errorBox.textContent = 'Please enter a valid email address.';
+        //     errorBox.classList.add('error');
+        //     emailInput.focus();
+        //     return;
+        //     }
 
-            const phoneRes = validatePhone(phone);
-            if (!phoneRes.valid) {
-            errorBox.textContent = 'Please enter a valid phone number.';
-            errorBox.classList.add('error');
-            phoneInput.focus();
-            return;
-            }
+        //     const phoneRes = validatePhone(phone);
+        //     if (!phoneRes.valid) {
+        //     errorBox.textContent = 'Please enter a valid phone number.';
+        //     errorBox.classList.add('error');
+        //     phoneInput.focus();
+        //     return;
+        //     }
 
-            // Valid — you can use phoneRes.normalized and email
-            console.log('Email valid:', email);
-            console.log('Phone normalized:', phoneRes.normalized);
+        //     // Valid — you can use phoneRes.normalized and email
+        //     console.log('Email valid:', email);
+        //     console.log('Phone normalized:', phoneRes.normalized);
 
-            }
-        })
+        //     }
+        // })
     })
 }
+
+export { infoValidation }

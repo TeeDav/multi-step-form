@@ -8,6 +8,7 @@ import { finishingUp } from "./pages/finishingUp.js";
 import { thankYou } from "./pages/thankYou.js";
 
 import animation_ from "./animations/pageTransitions.js";
+
 import { infoValidation } from "./validation/infoValidation.js";
 infoValidation()
 
