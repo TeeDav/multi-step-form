@@ -4,7 +4,8 @@ const validationScrits = {
      validateEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const valid = re.test(String(email).toLowerCase().trim());
-        return valid
+        console.log(valid)
+        return { valid }
     },
 
     // Returns { valid: boolean, normalized: string }
@@ -17,7 +18,10 @@ const validationScrits = {
         const len = digitsOnly.length;
         const valid = len >= minDigits && len <= maxDigits && re.test(trimmed);
         return { valid, normalized: (hasPlus ? '+' : '') + digitsOnly };
-    }
+    },
+
+    //validate that infoPage has been correctly filled
+    
 }
 
 export { validationScrits }

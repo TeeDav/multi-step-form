@@ -12,6 +12,12 @@ import animation_ from "./animations/pageTransitions.js";
 import { infoValidation } from "./validation/infoValidation.js";
 infoValidation()
 
+import { navHelper } from "./validation/navHelper.js";
+navHelper()
+
+import { planValidation } from "./validation/planValidation.js";
+planValidation()
+
 // const check = animation_
 const container = document.getElementById('container-root');
 const containerChild = document.getElementById('container-child');
@@ -41,7 +47,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //dispatch the navigate event so that the infoPage() renders
     window.dispatchEvent(new CustomEvent('navigate', { detail: 1}))
-    window.dispatchEvent(new CustomEvent('validation', { detail: 1}))
+    window.dispatchEvent(new CustomEvent('infoPageValidation'))
 });
 
 function addHeaderSectionClass(addClass) {
@@ -99,6 +105,7 @@ window.addEventListener('navigate', (e) => {
         case 1: //render infoPage
             containerChild.appendChild(infoPage())
             animation_.pageAnimIn(infoPage().getAttribute("id"))
+            window.dispatchEvent(new CustomEvent('infoPageValidation'))
             break;
         case 2:
             console.log('page2')

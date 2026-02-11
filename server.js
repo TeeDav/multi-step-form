@@ -1,25 +1,27 @@
-function server() {
-    const addons = [
-        [
-            'Online Service',
-            'Access to multiplayer games',
-            '+$1/mo'
-        ],
+export const navPages = [ // add the form pages here
+    'index',
+    'select-your-plan',
+    'pick add-ons',
+    'finishing-up',
+    'thank you'
+]
 
-        [
-            'Larger Storage',
-            'Extra 1TB of cloud save',
-            '+$2/mo'
-        ],
+export const addons = [
+    [
+        'Online Service',
+        'Access to multiplayer games',
+        '+$1/mo'
+    ],
 
-        [
-            'Customizable Profile',
-            'Custom theme on your profile',
-            '+$2/mo'
-        ]
+    [
+        'Larger Storage',
+        'Extra 1TB of cloud save',
+        '+$2/mo'
+    ],
+
+    [
+        'Customizable Profile',
+        'Custom theme on your profile',
+        '+$2/mo'
     ]
-
-    return { addons }
-}
-
-export { server }
+]

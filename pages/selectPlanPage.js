@@ -151,6 +151,7 @@ function selectPlanPage (){
                 cardArr[z].classList.remove('focused');
                 if (u == z) {
                     cardArr[z].classList.add('focused');
+                    window.dispatchEvent(new CustomEvent('plansPageReady'))
                 }
             }
         }, false);     

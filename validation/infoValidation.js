@@ -1,8 +1,9 @@
 import { Validator } from "./validationHelper.js";
 import { validationScrits } from "./validationScripts.js";
+import { setReady } from "./validationState.js";
 
 function infoValidation () {
-    window.addEventListener('validation', () => {
+    window.addEventListener('infoPageValidation', () => {
         
         console.log('hi')
         // const formControl = document.getElementById('formId')
@@ -18,165 +19,47 @@ function infoValidation () {
             phoneInput, //inputBox
             'error', //errClass
             'Please enter a valid phone number', //errMsg
-            validationScrits.validatePhone //function that will perform validation
+            validationScrits.validatePhone, //function that will perform validation
+            'infoPageReady' //event that should fire when input is valid
         ])
 
-        validatePhone.validate()
+        const phoneValid = validatePhone.validate()
+        // phoneValid()
 
-        // valid()
+        const validateEmail = new Validator([
+            '#emailErr', //msgId
+            emailInput, //inputBox
+            'error', //errClass
+            'Please enter a valid email', //errMsg
+            validationScrits.validateEmail, //function that will perform validation
+            'infoPageReady' //event that should fire when input is valid
+        ])
 
-        // emailInput.focusin = console.log('yay')
-        // emailInput.addEventListener('focusout', () => {
-        //     console.log('focus-out')
-        //     const email = emailInput.value;
-        //     console.log(email)
+        const emailValid = validateEmail.validate()
+        // emailValid()
 
-        //     if(!(email == '')) {
-        //         if (!validateEmail(email)) {
-        //             document.querySelector('#emailErr').textContent = 'Please enter a valid email address.';
-        //             // errorBox.classList.add('error');
-        //             // emailInput.focus();
-        //             emailInput.classList.add('error')
-        //             // email.style.hover.borderColor = 'green'
-        //             return;
-        //         } else if (validateEmail(email)) {
-        //             document.querySelector('#emailErr').textContent = '';
-        //             if (emailInput.classList.contains('error')) {
-        //                 emailInput.classList.remove('error')
-        //             }
-        //         }
+        console.log(validateEmail.isValid)
 
-        //         // Valid — you can use phoneRes.normalized and email
-        //         console.log('Email valid:', email);
-        //     } else return
-        // })
-        
-        //id of error message
-        //input box
-        //error class
-        //error message
+        let x = 10;
 
-        // function showPhoneErr() {
-        //     document.querySelector('#phoneErr').textContent = 'Please enter a valid phone number.';
-        //     phoneInput.classList.add('error')
-        // }
+        window.addEventListener('infoPageReady', () => {
+            let infoPageReady = false
 
-        // function removePhoneErr () {
-        //     document.querySelector('#phoneErr').textContent = '';
-        //     if (phoneInput.classList.contains('error')) {
-        //         phoneInput.classList.remove('error')
-        //     }
-        // }
+            if ((validatePhone.validate() == true) && (validateEmail.validate() == true)) {
+                console.log(`x is ${x}`)
+                infoPageReady = true
 
-        // phoneInput.addEventListener('keyup', () => {
-        //     let phone = phoneInput.value;
-        //     console.log(phone)
+                const id = crypto.randomUUID();
+                console.log(id)
+                setReady(id);
 
-        //     if(!(phone == '')) {
-        //         const phoneRes = validatePhone(phone);
-
-        //         if (!phoneRes.valid) {
-        //                 if (phoneRes.valid) {   
-        //                 removePhoneErr()
-        //                 return
-        //             }  
-
-        //             phoneInput.addEventListener('focusout', () => {
-        //                 showPhoneErr()
-        //             })
-                    
-        //             console.log('here')
-        //             return;
-        //         } else if (phoneRes.valid) {
-
-        //             if (!phoneRes.valid) {    
-        //                 showPhoneErr()
-        //                 return
-        //             }
-
-        //             removePhoneErr()
-        //             phoneInput.addEventListener('focusout', () => {
-        //                 removePhoneErr()
-        //             })
-        //             return
-        //         }                    
-        //         // Valid — you can use phoneRes.normalized and email
-        //         console.log('Phone normalized:', phoneRes.normalized);
-        //         return
-        //     } else if(phone == '') {
-        //         phone = ''
-        //         document.querySelector('#phoneErr').textContent = '';
-        //         if (phoneInput.classList.contains('error') || !(phoneInput.classList.contains('error'))) {
-        //             phoneInput.classList.remove('error')
-        //         }
-        //         phoneInput.addEventListener('focusout', () => {
-        //             removePhoneErr()
-        //         })
-        //         return
-        //     }
-        // })
-
-        // phoneInput.addEventListener('focusout', () => {
-        //     const phone = phoneInput.value;
-        //     if(!(phone == '')) {
-        //         const phoneRes = validatePhone(phone);
-        //         if (!phoneRes.valid) {
-        //             document.querySelector('#phoneErr').textContent = 'Please enter a valid phone number.';
-        //             // errorBox.classList.add('error');
-        //             // phoneInput.focus();
-        //             phoneInput.classList.add('error')
-        //             return;
-        //         } else if (phoneRes.valid) {
-        //             document.querySelector('#phoneErr').textContent = '';
-        //             if (phoneInput.classList.contains('error')) {
-        //                 phoneInput.classList.remove('error')
-        //             }
-        //         }                    
-        //         // Valid — you can use phoneRes.normalized and email
-        //         console.log('Phone normalized:', phoneRes.normalized);
-        //     } else return
-        // })
-
-        // async function valid() {
-        //     console.log('valid')
-        //     // console.log(emailInput)
-        //     const value = await emailInput?.value
-        //     console.log(value)
-        // }
-
-        
-        
-        // window.addEventListener('navigate', (e) => {
-        //     console.log('validation')
-        //     if (e.detail == 2) {
-        //         console.log('validated')
-        //         e.preventDefault();
-        //     const email = emailInput?.value;
-        //     const phone = phoneInput?.value;
-
-        //     console.log(emailInput)
-
-        //     if (!validateEmail(email)) {
-        //     errorBox.textContent = 'Please enter a valid email address.';
-        //     errorBox.classList.add('error');
-        //     emailInput.focus();
-        //     return;
-        //     }
-
-        //     const phoneRes = validatePhone(phone);
-        //     if (!phoneRes.valid) {
-        //     errorBox.textContent = 'Please enter a valid phone number.';
-        //     errorBox.classList.add('error');
-        //     phoneInput.focus();
-        //     return;
-        //     }
-
-        //     // Valid — you can use phoneRes.normalized and email
-        //     console.log('Email valid:', email);
-        //     console.log('Phone normalized:', phoneRes.normalized);
-
-        //     }
-        // })
+                window.dispatchEvent(new CustomEvent('nextPageReady', { detail: { id }}))  
+                
+                return
+             } //else {
+            //     window.dispatchEvent(new CustomEvent('nextPageReady', { detail: infoPageReady}))  
+            // }
+        })
     })
 }
 
