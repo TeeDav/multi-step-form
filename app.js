@@ -18,6 +18,8 @@ navHelper()
 import { planValidation } from "./validation/planValidation.js";
 planValidation()
 
+import { addonValidation } from "./validation/addonValidation.js";
+
 // const check = animation_
 const container = document.getElementById('container-root');
 const containerChild = document.getElementById('container-child');
@@ -119,6 +121,7 @@ window.addEventListener('navigate', (e) => {
         case 3:
             containerChild.appendChild(addOnsPage())
             animation_.pageAnimIn(addOnsPage().getAttribute("id"))
+            addonValidation()
             break;
         case 4:
             console.log(e.detail)

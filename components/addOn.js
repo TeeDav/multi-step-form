@@ -1,6 +1,8 @@
-function addOn([headNote, subNote, perMonth]) {
+export const addOnId = "add-on";
+
+export function addOn([headNote, subNote, perMonth, perYear]) {
     const addOn = document.createElement('div');
-    addOn.id = "add-on"
+    addOn.id = addOnId
     addOn.classList = 'add-ons'
     addOn.setAttribute('tabindex', '0')
 
@@ -53,6 +55,7 @@ function addOn([headNote, subNote, perMonth]) {
         }
         else if (!addOn.classList.contains('focused')) {
             addOn.classList.add('focused');
+            //dispatch an event to addonValidation.js
         }
         
         if (checkInput.checked == true) {
@@ -85,7 +88,5 @@ function addOn([headNote, subNote, perMonth]) {
         console.log('checked')
     }
 
-    return addOn;
+    return addOn
 }
-
-export { addOn }

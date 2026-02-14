@@ -28,6 +28,10 @@ function addOnsPage() {
     console.log(checkInput)
     const checkArr = [...checkInput]
     console.log(checkArr[2])
+
+    // addOn.addEventListener('click', (e) => {
+    //     console.log('addon clicked')
+    // })
     
     
     return addOnSection
