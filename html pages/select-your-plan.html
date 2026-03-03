@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- displays site properly based on user's device -->
+
+      <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
+      <link rel="stylesheet" href="/style.css">
+      
+      <title>Frontend Mentor | Multi-step form</title>
+
+    </head>  
+
+    <!-- Feel free to remove these styles or customise in your own stylesheet 👍 -->
+    <style>
+      .attribution { font-size: 11px; text-align: center; }
+      .attribution a { color: hsl(228, 45%, 44%); }
+    </style>
+
+    <body>
+    <div class="container">
+      <aside>
+        <div class="side">
+          <!-- <img class="side" src="./assets/images/bg-sidebar-desktop.svg" alt=""> -->
+          <div class="side-child">
+              <div class="number"><p>1</p></div>
+              <div class="desc">
+                <p>STEP 1</p>
+                <p>YOUR INFO</p>
+              </div>
+          </div>
+          <div class="side-child">
+            <div class="number"><p>2</p></div>
+            <div class="desc">
+              <p>STEP 2</p>
+              <p>SELECT PLAN</p>
+            </div>
+          </div>
+          <div class="side-child">
+            <div class="number"><p>3</p></div>
+            <div class="desc">
+              <p>STEP 3</p>
+              <p>ADD-ONS</p>
+            </div>
+          </div>
+          <div class="side-child">
+            <div class="number"><p>4</p></div>
+            <div class="desc">
+              <p>STEP 4</p>
+              <p>SUMMARY</p>
+            </div>
+          </div>
+        </div>
+      </aside>
+      <div class="container-body">
+        <div class="container-child">
+          <header>
+            <h1 class="heading">Select your plan</h1>
+            <p class="notes notes-margin">You have the option of monthly or yearly billing.</p>
+          </header>
+
+          <!-- plans -->
+          <section>
+            <div class="container-child-card margin" id="cards">
+              <div class="card" tabindex="0" id="card">
+                <div class="holder">
+                  <div class="card-icon"></div>
+                  <p class="notes">Arcade</p>
+                  <p class="notes">$9/mo</p>
+                </div>
+              </div>
+              <div class="card" tabindex="0">
+                <div class="holder">
+                  <div class="card-icon"></div>
+                  <p class="notes">Advanced</p>
+                  <p class="notes">$12/mo</p>
+                </div>
+              </div>
+              <div class="card" tabindex="0">
+                <div class="holder">
+                  <div class="card-icon"></div>
+                  <p class="notes">Pro</p>
+                  <p class="notes">$15/mo</p>
+                </div>
+              </div>
+            </div>
+            
+            <!-- switch -->
+            <div class="plan margin">
+              <div class="child">
+                <p class="notes">Monthly</p>              
+              </div>
+              <div class="child" id="showPlan" onclick="play()">
+                <div class="switch" id="toggle">
+                  <div class="switch-ball"></div>
+                </div>
+              </div>
+              <div class="child">
+                <p class="notes">Yearly</p>  
+              </div>
+            </div>
+          </section>
+          
+          <!-- navigation -->
+          <nav>
+            <div class="buttons">
+              <button><p class="notes" onclick="location.href = '../index.html'">Go Back</p></button>
+              <button id="next" onclick="location.href = './pick add-ons.html'"><p class="notes">Next Step</p></button>
+            </div>
+          </nav>
+          
+        </div>
+      </div>
+      
+    </div>
+    <!-- <div class="button">
+      <p class="notes"></p>
+      <p class="notes"></p>
+    </div>
+    /* side img section */
+    <section></section> -->
+    <script src="../scripts/main.js"></script>
+    </body>
+  </html>
+  
