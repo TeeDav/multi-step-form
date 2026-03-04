@@ -44,7 +44,13 @@ function infoValidation () {
 
         window.addEventListener('infoPageReady', () => {
             let infoPageReady = false
+            let nextDispatched = false
+            //console.log(infoPageReady)
 
+            // if ((nextDispatched) && (validatePhone.validate() == true) && (validateEmail.validate() == true)) {
+            //     return
+            // }
+                
             if ((validatePhone.validate() == true) && (validateEmail.validate() == true)) {
                 console.log(`x is ${x}`)
                 infoPageReady = true
@@ -53,12 +59,15 @@ function infoValidation () {
                 console.log(id)
                 setReady(id);
 
-                window.dispatchEvent(new CustomEvent('nextPageReady', { detail: { id }}))  
+                window.dispatchEvent(new CustomEvent('nextPageReady', { detail: { id }})) 
+                //nextDispatched = true
                 
                 return
-             } //else {
+            } //else {
             //     window.dispatchEvent(new CustomEvent('nextPageReady', { detail: infoPageReady}))  
             // }
+
+            
         })
     })
 }

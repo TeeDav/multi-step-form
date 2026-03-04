@@ -4,7 +4,7 @@ const validationScrits = {
      validateEmail(email) {
         const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
         const valid = re.test(String(email).toLowerCase().trim());
-        console.log(valid)
+        //console.log(valid)
         return { valid }
     },
 

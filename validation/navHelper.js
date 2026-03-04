@@ -42,49 +42,43 @@ export function navHelper () {
 
         console.log('Navigate once per dispatch')
 
-        // window.dispatchEvent(new CustomEvent('nextPageReady', { detail: false}))  
-        
-
-        // e.detail = false
         const navChild = document.getElementById('nav-child')
-        navChild.addEventListener('click', function(e) {
 
-            if (!(canNavigate(useID))) return;
+        Array.from(navChild.children).forEach(child => {
+            child.addEventListener('click', () => {
 
-            unsetReady();
-            
-            e.preventDefault();
+                if (!(canNavigate(useID))) return;
+                unsetReady();
 
-            console.log(e.detail)
-
-            if (e.target == navChild.childNodes[0].childNodes[0]) {
-                // e.target.addEventListener('click', (e) => {
-                //         location = '/index.html'
-                //     })
-                if(u !== 0){
-                    if (u == 1) {
-                        // navChild.childNodes[0].childNodes[0].remove()
-                        return
-                    } else {
-                        u = u - 1
-                        //fire the 'navigate' event
-                        window.dispatchEvent(new CustomEvent('navigate', { detail: u}))
+                if (child == navChild.childNodes[0].childNodes[0]) {
+                    // e.target.addEventListener('click', (e) => {
+                    //         location = '/index.html'
+                    //     })
+                    if(u !== 0){
+                        if (u == 1) {
+                            // navChild.childNodes[0].childNodes[0].remove()
+                            return
+                        } else {
+                            u = u - 1
+                            //fire the 'navigate' event
+                            window.dispatchEvent(new CustomEvent('navigate', { detail: u}))
+                        }
+                    } 
                     }
-                } 
-            }
-
-            if((e.target == navChild.childNodes[1]) || (e.target == navChild.childNodes[1].childNodes[0])) {
-                //console.log('here')
-                
-                if(u < pageLen - 1) {
-                    u = u + 1
-                    //console.log(u)
-                    
-                    //fire the 'navigate' event
-                    window.dispatchEvent(new CustomEvent('navigate', { detail: u}))
-                }
-            }  
-        });
+    
+                    if((child == navChild.childNodes[1]) || (child == navChild.childNodes[1].childNodes[0])) {
+                        //console.log('here')
+                        
+                        if(u < pageLen - 1) {
+                            u = u + 1
+                            //console.log(u)
+                            
+                            //fire the 'navigate' event
+                            window.dispatchEvent(new CustomEvent('navigate', { detail: u}))
+                        }
+                    } 
+            })
+        })
 
     })
 }
