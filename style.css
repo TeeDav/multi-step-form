@@ -38,7 +38,7 @@ body {
 
 .container {
     background-color: white;
-    margin-top: 5px;
+    margin-top: 85px;
     align-self: center;
     display: flex;
     padding: 15px;
@@ -391,6 +391,18 @@ body {
     background-color: hsl(213.41deg 95.65% 18.04%);
     font-size: 15px;
     padding: 16px 25px;
+}
+
+.buttonLight {
+    background-color: hsla(244, 100%, 62%, 0.938) !important;
+
+    &:hover {
+        background-color: hsla(244, 100%, 62%, 0.538) !important;
+    }
+
+    &:active {
+        background-color: hsla(244, 100%, 62%, 0.338) !important;
+    }
 }
 
 .buttons button:nth-child(even) .notes {

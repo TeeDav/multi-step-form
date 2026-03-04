@@ -85,17 +85,6 @@ function createSide() {
         side.appendChild(sideChild);
         console.log(side);
 
-
-        // const listItem = document.createElement('li');
-        // const anchor = document.createElement('a');
-        // anchor.href = `#${link.page}`;
-        // anchor.textContent = link.number;
-        // anchor.addEventListener('click', function(e) {
-        //     e.preventDefault();
-        //     window.dispatchEvent(new CustomEvent('navigate', { detail: link.page }));
-        // });
-        // listItem.appendChild(anchor);
-        // sideChild.appendChild(listItem);
     });
     
     return side;

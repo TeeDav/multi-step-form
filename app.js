@@ -20,6 +20,8 @@ planValidation()
 
 import { addonValidation } from "./validation/addonValidation.js";
 
+import { checkoutValidation } from "./validation/checkoutValidation.js";
+
 // const check = animation_
 const container = document.getElementById('container-root');
 const containerChild = document.getElementById('container-child');
@@ -127,6 +129,8 @@ window.addEventListener('navigate', (e) => {
             console.log(e.detail)
             containerChild.appendChild(finishingUp().section)
             animation_.pageAnimIn(finishingUp().sectionId)
+            checkoutValidation()
+            window.dispatchEvent(new CustomEvent('checkoutReady'))
             break;
         case 5:
             // console.log(e.detail)
