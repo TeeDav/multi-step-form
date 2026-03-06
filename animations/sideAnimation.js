@@ -29,7 +29,7 @@ export function sideAnimation () {
     const circleBound4 = circle4.getBoundingClientRect();
 
 
-    circleArr.forEach(circle => {
+    circleArr.forEach((circle, index)=> {
         const overlay = document.createElement('div')
         overlay.id = 'overlay'
         overlay.classList.add('overlay')
@@ -40,83 +40,65 @@ export function sideAnimation () {
         overlay.style.height = circleBound1.height + 'px'
         // overlay.style.border = getComputedStyle(circle1).border + 'px'
         overlay.style.borderRadius = '17px'
-        overlay.style.backgroundColor = getComputedStyle(circle1).backgroundColor
+        overlay.style.backgroundColor = 'hsl(206, 94%, 87%)'
         // overlay.style.transition = 'all 0.5s ease'
         overlay.stylezIndex = '999'
         overlay.style.transform = 'translateY(-100%)'
 
-        // const overlayNumber = document.createElement('p')
-        // overlayNumber.classList.add('overlay-number')
-        // overlayNumber.innerText = 1
+
+        const overlayNumber = document.createElement('p')
+        overlayNumber.classList.add('overlay-number')
+        overlayNumber.innerText = index + 1
+
+        circle.appendChild(overlayNumber)
 
         circle.appendChild(overlay)
     })
 
-    circleArr[0].childNodes[1].style.transform = 'translateY(0%)'
+    circleArr[0].childNodes[2].style.transform = 'translateY(0%)'
+    circleArr[0].childNodes[1].classList.add('inset-number')
 
-    function animateTransfer() {
-        let pos = u 
-        console.log('pos', pos)
+
+
+    function animateTransfer(pos) {
+        //let pos = u 
+        console.log('pos', pos, `u is ${u}`)
         
-        // circle1.style.overflow = 'hidden'
         console.log(circleArr[pos])
-        // circleArr[pos].appendChild(overlay)
-        // circle2.appendChild(overlay)
-        // circle3.appendChild(overlay)
-        // circle4.appendChild(overlay)
-
-        // console.log(overlay)
 
         const overlay = document.querySelectorAll('#overlay')
-            console.log(overlay)
+        console.log(overlay)
 
-            circleArr[pos - 2].childNodes[1].addEventListener('transitionend', (e) => {
+        if (pos > u) {
+            console.log('slide down!')
+            circleArr[pos - 2].childNodes[2].addEventListener('transitionend', (e) => {
                 console.log('transitioned')
                 if (e.propertyName === 'transform') {
                     console.log('transitioned')
                 //enter
-                circleArr[pos - 1].childNodes[1].style.transform = 'translateY(0%)'
+                circleArr[pos - 1].childNodes[2].style.transform = 'translateY(0%)'
+                circleArr[pos - 1].childNodes[1].classList.add('inset-number')
                 }
             })
-
+    
             //go down
-            circleArr[pos - 2].childNodes[1].style.transform = 'translateY(100%)'
+            circleArr[pos - 2].childNodes[2].style.transform = 'translateY(100%)'
+            circleArr[pos - 2].childNodes[1].classList.remove('inset-number')
+            circleArr[pos - 2].childNodes[1].classList.add('inset-number-post')
+        } else if (pos < u) {
+            console.log('slide up!')
+        }
 
-            setTimeout(() => {
+        u = pos
+        console.log(`u is now ${u}`)
 
-            }, )
+        setTimeout(() => {
+
+        }, )
 
         requestAnimationFrame(() => {
-            // overlay.style.transform = 'translateY(-100%)';
-            // overlay.style.transform = 'translateY(-100%)'
-            // overlay.style.transform = 'translateY(0%)'
-
-            // setInterval(() => {
-            //     //enter
-            //     circleArr[pos].childNodes[1].style.transform = 'translateY(0%)'
-            // }, 2000)
-
-                //enter
-            console.log('pos', pos)
-            // if (pos = 1) {
-            //     console.log(circleArr[pos - 1])
-            //     //go down
-            //     circleArr[pos - 1].childNodes[1].style.transform = 'translateY(200%)'
-            // }
-
-            
-
-            
-
-            // overlay.style.left = circleBound2.left + 'px'
-            // overlay.style.top = circleBound2.top + 'px'
-            // circle2.appendChild(overlay)
-
+            //
         });
-
-        // overlay.addEventListener('transitioned', () => {
-
-        // })
 
     }
 
@@ -255,9 +237,9 @@ export function sideAnimation () {
 
 
     window.addEventListener('sideAnimate', (e) => {
-        u = e.detail
+        // u = e.detail
         console.log(e.detail)
-        animateTransfer()
+        animateTransfer(e.detail)
 
         // moveOverlay(circle1, circle2)
 

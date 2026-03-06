@@ -97,9 +97,9 @@ body {
 }
 
 .side-child:nth-child(1) .number {
-    background-color: hsl(206, 94%, 87%);
+    /* background-color: hsl(206, 94%, 87%); */
     p {
-        color: hsl(213, 96%, 18%) !important;
+        /* color: hsl(213, 96%, 18%) !important; */
     }
 }
 
@@ -120,9 +120,20 @@ body {
 }
 
 .overlay-number {
-    position: absolute;
-    z-index: -1;
-    color: black;
+    position: absolute !important;
+    z-index: 1 !important;
+    color: hsl(213, 96%, 18%) !important;
+    /* color: black !important; */
+    clip-path: inset(0 0 100% 0);
+    transition: all 0.35s ease !important;
+}
+
+.inset-number {
+    clip-path: inset(0 0 0 0) !important;
+}
+
+.inset-number-post {
+    clip-path: inset(0 0 0 100%) !important;
 }
 
 .desc {
