@@ -65,7 +65,9 @@ export function navHelper () {
                         } else {
                             u = u - 1
                             //fire the 'navigate' event
-                            window.dispatchEvent(new CustomEvent('navigate', { detail: u}))
+                            window.dispatchEvent(new CustomEvent('navigate', { detail: u }))
+
+
                         }
                     } 
                     }
@@ -77,6 +79,11 @@ export function navHelper () {
                             
                             //fire the 'navigate' event
                             window.dispatchEvent(new CustomEvent('navigate', { detail: u}))
+
+                            //fire the event for side animation
+                            window.dispatchEvent(new CustomEvent('sideAnimate', { detail: u}))
+                            console.log(u)
+                            console.log('sideanimation fired')
                         }
                     } 
             })

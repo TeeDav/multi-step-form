@@ -52,6 +52,7 @@ function createSide() {
         //create number div and add class
         const num = document.createElement('div');
         num.classList.add('number');
+        num.classList.add('pseudo-number');
         
         //create copy div and add class
         const copy = document.createElement('div');

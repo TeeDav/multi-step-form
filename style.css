@@ -49,6 +49,8 @@ body {
 }
 
 .side {
+    position: relative;
+    overflow: hidden;
     background-image: url('./assets/images/bg-sidebar-desktop.svg');
     background-size: cover;
     background-repeat: no-repeat;
@@ -75,12 +77,23 @@ body {
 }
 
 .number {
+    position: relative;
+    display: flex;
     width: 33px;
     height: 33px;
     border: solid 1px hsl(229, 24%, 87%);
     align-content: center;
     border-radius: 17px;
     text-align: center;
+    /* overflow: hidden; */
+    align-items: center;
+    justify-content: center;
+    /* overflow: hidden; */
+
+}
+
+.pseudo-number {
+    overflow: hidden;
 }
 
 .side-child:nth-child(1) .number {
@@ -98,6 +111,18 @@ body {
     /* color: hsl(229, 24%, 87%); */
     color: white;
     font-weight: bold;
+    inset: center;
+    position: relative;
+}
+
+.overlay {
+    transition: all 0.45s ease !important;
+}
+
+.overlay-number {
+    position: absolute;
+    z-index: -1;
+    color: black;
 }
 
 .desc {

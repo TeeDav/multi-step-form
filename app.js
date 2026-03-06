@@ -22,6 +22,9 @@ import { addonValidation } from "./validation/addonValidation.js";
 
 import { checkoutValidation } from "./validation/checkoutValidation.js";
 
+import { sideAnimation } from "./animations/sideAnimation.js";
+
+
 // const check = animation_
 const container = document.getElementById('container-root');
 const containerChild = document.getElementById('container-child');
@@ -34,6 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Render sidebar
     const sidebarRoot = document.getElementById('sidebar-root');
     sidebarRoot.appendChild(createSide());
+    //sidebar animation function
+    sideAnimation();
     
     //render navbar
     containerChild.appendChild(navBar());
