@@ -87,6 +87,7 @@ export function sideAnimation () {
             circleArr[pos - 2].childNodes[1].classList.add('inset-number-post')
         } else if (pos < u) {
             console.log('slide up!')
+
         }
 
         u = pos

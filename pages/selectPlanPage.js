@@ -18,9 +18,9 @@ function selectPlanPage (){
     cardsWrap.id = 'cards'
 
     const plans = [
-        { name: 'Arcade', price: '$9/mo' },
-        { name: 'Advanced', price: '$12/mo' },
-        { name: 'Pro', price: '$15/mo' }
+        { name: 'Arcade', pricePerMonth: '$9/mo', pricePerYear: '$90/yr' },
+        { name: 'Advanced', pricePerMonth: '$12/mo', pricePerYear: '$120/yr' },
+        { name: 'Pro', pricePerMonth: '$15/mo', pricePerYear: '$150/yr' }
     ]
 
     let cardArr = []
@@ -44,11 +44,17 @@ function selectPlanPage (){
 
         const price = document.createElement('p')
         price.classList = 'notes'
-        price.innerText = plan.price
+        price.innerText = plan.pricePerMonth
+
+        const freq = document.createElement('p')
+        freq.classList = 'notes'
+        freq.innerText = '2 months free'
 
         holder.appendChild(icon)
         holder.appendChild(title)
         holder.appendChild(price)
+        holder.appendChild(freq)
+
         card.appendChild(holder)
         cardsWrap.appendChild(card)
     })
@@ -62,6 +68,7 @@ function selectPlanPage (){
     const monthlyText = document.createElement('p')
     monthlyText.classList = 'notes'
     monthlyText.innerText = 'Monthly'
+    monthlyText.style.color = 'hsl(213.41deg 95.65% 25.04%)'
     childMonthly.appendChild(monthlyText)
 
     const childToggle = document.createElement('div')
@@ -117,13 +124,31 @@ function selectPlanPage (){
             ball.style.left = "17px";
             // toggleSwitch.style.justifyContent = "flex-end";
             // toggle[0].style.marginLeft = "14px";
+
+            plans.forEach((plan, i) => {
+                cardArr[i].childNodes[0].childNodes[2].innerText = plan.pricePerYear
+                cardArr[i].childNodes[0].childNodes[3].innerText = '2 months free'
+
+                yearlyText.style.color = 'hsl(213.41deg 95.65% 25.04%)'
+                monthlyText.style.color = '#9c9eb1'
+
+            })
             
             extended = true;
 
         } else {
             for(let i=0; i<cardArr.length; i++) {
                 cardArr[i].style.height = "161px";
+                plans.forEach((plan, i) => {
+                    cardArr[i].childNodes[0].childNodes[2].innerText = plan.pricePerMonth
+                    cardArr[i].childNodes[0].childNodes[3].innerText = ''
+
+                yearlyText.style.color = '#9c9eb1'
+                monthlyText.style.color = 'hsl(213.41deg 95.65% 25.04%)'
+
+                })
             }
+
             ball.style.left = "0px";
             // toggleSwitch.style.justifyContent = "flex-start";
             // toggle[0].style.marginLeft = "4px";

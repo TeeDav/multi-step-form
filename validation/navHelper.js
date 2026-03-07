@@ -2,20 +2,22 @@ import { navPages } from "../server.js";
 import { canNavigate, unsetReady } from "./validationState.js";
 
 
-const pageLen = navPages.length + 1;
+const pageLen = navPages.length;
+console.log(pageLen)
 let u = 1;
 
 export function navHelper () {
+    console.log(pageLen)
     //listen for the 'navigate' event when it fires and do something with the information in the 'detail' object
     window.addEventListener('navigate', (e) => {
         const navChild = document.getElementById('nav-child')
         console.log(navChild.childNodes[0].childNodes[0])
         if (e.detail == 1) {
             navChild.childNodes[0].childNodes[0].remove()
-        } else if (e.detail == pageLen - 1) {
+        } else if (e.detail == pageLen) {
             navChild.childNodes[0].childNodes[0].remove()
             navChild.childNodes[1].remove()
-        } else if (e.detail == pageLen - 2) {
+        } else if (e.detail == pageLen - 1) {
             const navBtn = navChild.childNodes[1];
             navBtn.classList.add('buttonLight')
             navBtn.style.backgroundColor = 'hsla(244, 100%, 62%, 0.938)'
@@ -41,6 +43,8 @@ export function navHelper () {
     })
 
 
+
+
     //listens for when current page is validated
     window.addEventListener('nextPageReady', (e) => {
         console.log(e.detail)
@@ -53,45 +57,95 @@ export function navHelper () {
 
         Array.from(navChild.children).forEach(child => {
             child.addEventListener('click', () => {
+                console.log(navChild.childNodes[0])
 
                 if (!(canNavigate(useID))) return;
                 unsetReady();
 
-                if (child == navChild.childNodes[0].childNodes[0]) {
-                    
-                    if(u !== 0){
-                        if (u == 1) {
-                            return
-                        } else {
-                            u = u - 1
-                            //fire the 'navigate' event
-                            window.dispatchEvent(new CustomEvent('navigate', { detail: u }))
+                if (child == navChild.childNodes[0]) {
+                    console.log('going back')
+                    if (u > 1) {
+                        console.log('going back')
+                        u = u - 1
+                        //fire the 'navigate' event
+                        window.dispatchEvent(new CustomEvent('navigate', { detail: u }))
 
-                            //fire the event for side animation
-                            window.dispatchEvent(new CustomEvent('sideAnimate', { detail: u}))
+                        console.log('going back')
 
-
-
-                        }
-                    } 
+                        //fire the event for side animation
+                        window.dispatchEvent(new CustomEvent('sideAnimate', { detail: u}))
                     }
-    
-                    if((child == navChild.childNodes[1]) || (child == navChild.childNodes[1].childNodes[0])) {
+                    return
+                } else if((child == navChild.childNodes[1]) || (child == navChild.childNodes[1].childNodes[0])) {
+                    
+                    if(u < pageLen) {
+                        console.log('going front')
+                        u = u + 1
                         
-                        if(u < pageLen - 1) {
-                            u = u + 1
-                            
-                            //fire the 'navigate' event
-                            window.dispatchEvent(new CustomEvent('navigate', { detail: u}))
+                        //fire the 'navigate' event
+                        window.dispatchEvent(new CustomEvent('navigate', { detail: u}))
+                        console.log('going front')
 
-                            //fire the event for side animation
-                            window.dispatchEvent(new CustomEvent('sideAnimate', { detail: u}))
-                            console.log(u)
-                            console.log('sideanimation fired')
-                        }
-                    } 
+                        //fire the event for side animation
+                        window.dispatchEvent(new CustomEvent('sideAnimate', { detail: u}))
+                        console.log(u)
+                        console.log('sideanimation fired')
+                        return
+                    }
+                    return
+                } else {
+                    return
+                }
             })
         })
 
     })
+
+
+    // window.addEventListener('DOMContentLoaded', () => {
+    //     //to enable slide-up animation on sidebar
+    //     const navChild = document.getElementById('nav-child')
+
+    //     Array.from(navChild.children).forEach(child => {
+    //         child.addEventListener('click', () => {
+    //             // if (!(canNavigate(useID))) return;
+    //             // unsetReady();
+
+    //             if (child == navChild.childNodes[0].childNodes[0]) {
+                    
+    //                 if(u !== 0){
+    //                     if (u == 1) {
+    //                         return
+    //                     } else {
+    //                         u = u - 1
+    //                         //fire the 'navigate' event
+    //                         window.dispatchEvent(new CustomEvent('navigate', { detail: u }))
+
+    //                         //fire the event for side animation
+    //                         window.dispatchEvent(new CustomEvent('sideAnimate', { detail: u}))
+
+
+
+    //                     }
+    //                 } 
+    //                 }
+
+    //                 // if((child == navChild.childNodes[1]) || (child == navChild.childNodes[1].childNodes[0])) {
+                        
+    //                 //     if(u < pageLen - 1) {
+    //                 //         u = u + 1
+                            
+    //                 //         //fire the 'navigate' event
+    //                 //         window.dispatchEvent(new CustomEvent('navigate', { detail: u}))
+
+    //                 //         //fire the event for side animation
+    //                 //         window.dispatchEvent(new CustomEvent('sideAnimate', { detail: u}))
+    //                 //         console.log(u)
+    //                 //         console.log('sideanimation fired')
+    //                 //     }
+    //                 // } 
+    //         })
+    //     })
+    // })
+    
 }
