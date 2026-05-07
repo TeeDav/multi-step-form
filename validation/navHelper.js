@@ -4,6 +4,11 @@ import { canNavigate, unsetReady } from "./validationState.js";
 const pageLen = navPages.length;
 console.log(pageLen);
 let u = 1;
+let useID = null;
+unsetReady();
+let infoPage = false
+let checkoutPage = false;
+let ranOnce = false;
 
 export function navHelper() {
   console.log(pageLen);
@@ -35,8 +40,15 @@ export function navHelper() {
 
       //event listener to go to previous page
       navChild.childNodes[0].childNodes[0].addEventListener("click", () => {
+
+        //unsetReady();
+
+        if (canNavigate(useID)) return;
+
+        console.log(u);
+
         //go to previous page
-        u = e.detail - 1;
+        u = u - 1;
         //fire the navigation event
         window.dispatchEvent(new CustomEvent("navigate", { detail: u }));
 
@@ -47,22 +59,132 @@ export function navHelper() {
       });
     }
     console.log(e.detail);
+
+  //const navChild = document.getElementById("nav-child");
+
+  //when 'next step' is clicked in info page, dispatch event to 
+  //validate user inputs
+  Array.from(navChild.children).forEach((child) => {
+    //ranOnce = false;
+    child.addEventListener("click", () => {
+      // ranOnce = false;
+      console.log(navChild.childNodes[0]);
+
+      if (
+        child == navChild.childNodes[1] ||
+        child == navChild.childNodes[1].childNodes[0]
+      ) {
+          if (u == 1) {
+            infoPage = true;
+            window.addEventListener("nextPageReady", (e) => {
+              //infoPage = true;
+              if (u !== 1) return
+              console.log('up here');
+              useID = e.detail.id;
+              console.log(useID)
+
+              console.log("Navigate once per dispatch"); 
+              console.log(u)
+              u = u + 1;
+              //infoPage = true;
+            
+              unsetReady();
+
+              //fire the 'navigate' event
+              window.dispatchEvent(new CustomEvent("navigate", { detail: u }));
+
+              infoPage = false;
+            });
+
+            console.log('validate info')
+            window.dispatchEvent(new CustomEvent('infoPageValidation'))
+            return
+          }
+
+          else if ((u == 4)) {
+            console.log('u became 4', ranOnce)
+            unsetReady();
+
+            //if (canNavigate(useID)) return
+
+            if (ranOnce == true) {
+              console.log(ranOnce)
+              ranOnce = false;
+              return
+            }
+            console.log('not!')
+            //if (!canNavigate(useID)) return
+            checkoutPage = true;
+            console.log(u, ranOnce)
+            //if (ranOnce) return
+            console.log(u, ranOnce)
+            //ranOnce = true;
+            
+            window.addEventListener("congratsPage", (e) => {
+              checkoutPage = true;
+              useID = e.detail.id;
+              unsetReady();
+              if (canNavigate(useID)) return
+              //if (ranOnce) return
+  
+              console.log(u)
+              console.log((u !== 4))
+              //infoPage = true;
+              if (!(u == 4))  return
+              console.log('up here');
+              useID = e.detail.id;
+              console.log(useID)
+
+              console.log("Navigate once per dispatch"); 
+              console.log(u)
+              //ranOnce = true;
+              console.log(ranOnce)
+              u = u + 1;
+              unsetReady();
+              //infoPage = true;
+              
+              console.log(u)
+              
+
+              //fire the 'navigate' event
+              window.dispatchEvent(new CustomEvent("navigate", { detail: u }));
+
+              checkoutPage = false;
+              ranOnce = false;
+              console.log(ranOnce)
+            });
+
+            console.log('validate info')
+            window.dispatchEvent(new CustomEvent('checkoutReady'))
+            return
+          }
+        }
+    })
+  })
+
+
+  
   });
 
   //listens for when current page is validated
   window.addEventListener("nextPageReady", (e) => {
-    console.log(e.detail);
-    let useID = e.detail.id;
+    //ranOnce = false;
+    console.log((infoPage == true) || checkoutPage == true) 
+    if ((infoPage == true) || checkoutPage == true) return;
+    console.log('called');
+    useID = e.detail.id;
+    console.log(useID)
 
-    console.log("Navigate once per dispatch");
+    console.log("Navigate once per dispatch"); 
 
     const navChild = document.getElementById("nav-child");
 
     Array.from(navChild.children).forEach((child) => {
       child.addEventListener("click", () => {
-        console.log(navChild.childNodes[0]);
+        console.log(navChild.childNodes[0], canNavigate(useID));
 
-        if (!canNavigate(useID)) return;
+        console.log(pageLen)
+        if (!canNavigate(useID) || infoPage == true) return;
         unsetReady();
 
         if (child == navChild.childNodes[0]) {
@@ -70,6 +192,7 @@ export function navHelper() {
           if (u > 1) {
             console.log("going back");
             u = u - 1;
+            console.log(u)
             //fire the 'navigate' event
             window.dispatchEvent(new CustomEvent("navigate", { detail: u }));
 
@@ -83,8 +206,16 @@ export function navHelper() {
           child == navChild.childNodes[1] ||
           child == navChild.childNodes[1].childNodes[0]
         ) {
-          if (u < pageLen) {
-            console.log("going front");
+          console.log(u, (u < pageLen) && (u >= 2))
+          if ((u < pageLen) && (u >= 2)) {
+            console.log('here!', u)
+            console.log(((infoPage == true) && (u == 1)))
+
+            if (((infoPage == true) && (u == 1)) || (checkoutPage == true)) return
+            console.log("going front", u);
+            
+            ranOnce = true;
+
             u = u + 1;
 
             //fire the 'navigate' event
@@ -104,4 +235,5 @@ export function navHelper() {
       });
     });
   });
+
 }

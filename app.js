@@ -1,7 +1,7 @@
 import { createSide } from "./components/sidebar.js";
 import { navBar } from "./components/navBar.js";
 import { header } from "./components/header.js";
-import { infoPage } from "./pages/infoPage.js";
+//import { infoPage } from "./pages/infoPage.js";
 import { selectPlanPage } from "./pages/selectPlanPage.js";
 import { addOnsPage } from "./pages/pickAddons.js";
 import { finishingUp } from "./pages/finishingUp.js";
@@ -9,8 +9,7 @@ import { thankYou } from "./pages/thankYou.js";
 
 import animation_ from "./animations/pageTransitions.js";
 
-import { infoValidation } from "./validation/infoValidation.js";
-infoValidation()
+//import { infoValidation } from "./validation/infoValidation.js";
 
 import { navHelper } from "./validation/navHelper.js";
 navHelper()
@@ -24,8 +23,42 @@ import { checkoutValidation } from "./validation/checkoutValidation.js";
 
 import { sideAnimation } from "./animations/sideAnimation.js";
 
+import infoPageLoader from "./preLoaders/infoPreLoader.js";
+import { loadStore } from "./helpers/loader.js";
+import { navigator } from "./helpers/navigator.js";
 
-// const check = animation_
+//import { infoPageStore } from "./helpers/pageStore.js";
+
+//********************************* */
+let pageHolder = [];
+
+// async function loadStore() {
+//     //this line models reading data from pageStore and lazyloading it
+//     const storeData = await import("./helpers/pageStore.js");
+//     //console.log(storeData)
+//     let _infoPage = await import(storeData.infoPageStore.pageInit);
+//     console.log(_infoPage.infoPage);
+//     pageHolder = await _infoPage.infoPage
+//     let holderTest = pageHolder
+//     console.log(typeof(pageHolder))
+//     console.log(pageHolder)
+//     // storeData.infoPageStore.nextPageInit = 
+//     window.dispatchEvent(new CustomEvent('navigate', { detail: 1}))
+// }
+
+// setTimeout(() => {
+//     loadStore()
+// }, 5000)
+//********************************************
+
+setTimeout(() => {
+    loadStore()
+}, 50)
+
+setTimeout(() => {
+    navigator()
+}, 100)
+
 const container = document.getElementById('container-root');
 const containerChild = document.getElementById('container-child');
 let headerSection
@@ -56,7 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //dispatch the navigate event so that the infoPage() renders
     window.dispatchEvent(new CustomEvent('navigate', { detail: 1}))
-    window.dispatchEvent(new CustomEvent('infoPageValidation'))
+    //window.dispatchEvent(new CustomEvent('infoPageValidation'))
+    //infoValidation()
 });
 
 function addHeaderSectionClass(addClass) {
@@ -84,7 +118,7 @@ window.addEventListener('navigate', (e) => {
 
 
     const pages = [
-        infoPage(),
+        //pageHolder(),
         selectPlanPage().section,
         addOnsPage(),
         finishingUp().sectionId,
@@ -112,9 +146,14 @@ window.addEventListener('navigate', (e) => {
     // You can expand this with AJAX or templates
     switch(e.detail) {
         case 1: //render infoPage
-            containerChild.appendChild(infoPage())
-            animation_.pageAnimIn(infoPage().getAttribute("id"))
-            window.dispatchEvent(new CustomEvent('infoPageValidation'))
+            if (pageHolder == []) break;
+            console.log(pageHolder)
+            if (!(pageHolder == [])) {
+                containerChild.appendChild(pageHolder())
+            }
+            animation_.pageAnimIn(pageHolder().getAttribute("id"))
+            infoValidation()
+            //window.dispatchEvent(new CustomEvent('infoPageValidation'))
             break;
         case 2:
             console.log('page2')
@@ -135,7 +174,7 @@ window.addEventListener('navigate', (e) => {
             containerChild.appendChild(finishingUp().section)
             animation_.pageAnimIn(finishingUp().sectionId)
             checkoutValidation()
-            window.dispatchEvent(new CustomEvent('checkoutReady'))
+            //window.dispatchEvent(new CustomEvent('checkoutReady'))
             break;
         case 5:
             // console.log(e.detail)

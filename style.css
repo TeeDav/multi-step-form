@@ -1,9 +1,128 @@
+:root {
+    --container-direction: row;
+    --container-width: fit-content;
+    --container-padding: 15px;
+    --container-margin: 0 auto;
+    --container-overflow: hidden;
+    --container-bg-color: white;
+    --desc-display: flex;
+    --side-width: 275px;
+    --side-border-radius: 10px;
+    --side-direction: column;
+    --side-justify: none;
+    --side-background-pos: -22px;
+    --side-height: 510px;
+    --side-child-margin: 0px 0px 0px 32px;
+
+    --container-body-radius: 0px;
+    --container-body-position: relative;
+    --container-body-width: 622px;
+    --container-body-padding: 33px 0px 0px 0px;
+
+    --container-child-width: 463px;
+
+    --header-mb: 0px; 
+    --header-font-size: 32px;
+
+    --form-container-mt: 27px;
+    --form-control-display: block;
+    --form-control-direction: row;
+    --input-width: 436px;
+    --input-height: 27px;
+    --input-mt: 9px;
+    --input-mb: 30px;
+
+    --notes-line-height: 12px;
+    --notes-margin-top: 21px;
+
+    --btns-width: 100%;
+    --btns-radius: 8px;
+    --btns-padding: 16px 25px;
+    --btns-top: 433px;
+}
+
+@media only screen and (max-width: 767px) {
+    :root {
+        --container-direction: column;
+        --container-width: 100vw;
+        --container-padding: 0px;
+        --container-margin: -15.2vw auto 0px auto;
+        --container-overflow: hidden;
+        --container-height: 100%;
+        --container-bg-color: #eef5ff;
+
+        --desc-display: none;
+        --side-width: 100%;
+        --side-border-radius: 0px;
+        --side-direction: row;
+        --side-justify: center;
+        --side-background-pos: 87%;
+        --side-height: 35vmin;
+        --side-child-margin: 2vw 2vw;
+
+        --container-body-radius: 10px;
+        --container-body-position: relative;
+        --container-body-width: 78vw;
+        --container-body-padding: 25px 5vw 27px 5vw;
+
+        --container-child-width: 100%;
+
+        --header-mb: 3vmin;
+        --header-font-size: 28px;
+
+        --form-container-mt: 0px;
+        --form-control-display: flex;
+        --form-control-direction: column;
+        --input-width: 68vw;
+        --input-height: 21px;
+        --input-mt: 0px;
+        --input-mb: 12px;
+
+        --notes-line-height: 27.5px;
+        --notes-margin-top: 14px;
+
+        --btns-width: calc(100% + 5vw);
+        --btns-top: 115vmin;
+    }
+}
+
+@media only screen and (max-width: 425px) {
+    :root {
+
+        --container-margin: -17.2vw auto 0px auto;
+
+        --header-font-size: 24px;
+        
+        --side-child-margin: 2vw 2vw;
+
+        --container-body-padding: 25px 5vw 26px 5vw;
+
+        --header-mb: 4.6vmin;
+
+        --notes-margin-top: 3.8vw;
+        --btns-radius: 4px;
+        --btns-padding: 14px 17px;
+        --btns-top: 133vmin;
+    }
+}
+
+@media only screen and (max-width: 375px) {
+    :root {
+        --header-mb: 5vmin;
+        --btns-top: 145vmin;
+    }
+}
+
 body {
     /* background-color: hsl(229, 24%, 87%); */
     background-color: #eef5ff;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: clip;
+    width: 100vw;
+    margin: 0px;
+    height: 100vh;
 }
 
 @font-face {
@@ -32,20 +151,24 @@ body {
         local('./assets/fonts/Ubuntu-Regular.ttf'),
         url('./assets/fonts/Ubuntu-Regular.ttf')
         format("truetype");
-    font-weight: 400;
-    font-style: normal;
+        font-weight: 400;
+        font-style: normal;
 }
 
+
 .container {
-    background-color: white;
-    margin-top: 85px;
+    background-color: var(--conatiner-bg-color);
+    /* margin-top: 30px; */
     align-self: center;
     display: flex;
-    padding: 15px;
-    border-radius: 10px;
-    /* flex-grow: 1; */
-    /* flex-basis: 100%; */
-    /* overflow: hidden; */
+    flex-direction: var(--container-direction);
+    border-radius: var(--side-border-radius);
+    margin: 0 auto;
+    width: var(--container-width);
+    overflow-x: var(--container-overflow);
+    position: relative;
+    /* background-color: white; */
+    height: var(--container-height);
 }
 
 .side {
@@ -54,25 +177,26 @@ body {
     background-image: url('./assets/images/bg-sidebar-desktop.svg');
     background-size: cover;
     background-repeat: no-repeat;
-    height: 510px;
+    height: var(--side-height);
     /* width: 274px; */
     /* width: 274px; */
     /* width: 280px; */
-    width: 275px;
+    width: var(--side-width);
     /* border: 1px solid red ; */
-    border-radius: 10px;
+    border-radius: var(--side-border-radius);
     display: flex;
+    flex-direction: var(--side-direction);
+    justify-content: var(--side-justify);
     /* flex-shrink: 1; */
-    flex-direction: column;
     padding-top: 38px;
-    background-position-y: -22px;
+    background-position-y: var(--side-background-pos);
 }
 
 .side-child {
     display: flex;
     flex-direction: row;
     /* margin-top: 37px; */
-    margin-left: 32px;
+    margin: var(--side-child-margin); 
     margin-bottom: 26px;
 }
 
@@ -137,7 +261,7 @@ body {
 }
 
 .desc {
-    display: flex;
+    display: var(--desc-display);
     flex-direction: column;
     margin-left: 14px;
 }
@@ -165,26 +289,26 @@ body {
 }
 
 .container-body {
-    /* border: 1px solid red; */
+    position: var(--container-body-position);
     display: flex;
     /* margin-left: 10px; */
-    margin-left: 14px;
+    margin: var(--container-margin);
+    border-radius: var(--container-body-radius);
     /* width: 600px; */
-    width: 622px;
-    /* flex-basis: 20px;
-    flex-grow: 1; */
+    width: var(--container-body-width);
+    padding: var(--container-body-padding);
     justify-content: center;
-    margin-right: 3px;
+    background-color: white;
+    z-index: 99;
 }
 
 .container-child {
     display: flex;
     /* border: 1px solid red; */
-    width: 463px;
+    width: var(--container-child-width);
     flex-direction: column;
     /* justify-content: center; */
     align-items: flex-start;
-    padding-top: 33px;
     position: relative;
     margin-left: 5px;
     height: inherit;
@@ -199,9 +323,13 @@ body {
     /* transform: scaleY(1.1); */
     /* letter-spacing: 0.015em; */
     /* word-spacing: 0.1em; */
-    font-size: 32px;
+    font-size: var(--header-font-size);
     height: 25.5px;
     line-height: 26px;
+}
+
+#header {
+    margin-bottom: var(--header-mb);
 }
 
 .notes,
@@ -216,7 +344,7 @@ body {
     /* word-spacing: 0.07em; */
     /* margin-top: 4px; */
     height: 19.5px;
-    line-height: 12px;
+    line-height: var(--notes-line-height);
 }
 
 .form-container input {
@@ -224,8 +352,10 @@ body {
 }
 
 .notes-margin {
-    margin-top: 21px;
+    margin-top: var(--notes-margin-top);
     margin-bottom: 0px;
+    font-size: 17px;
+    height: auto;
 }
 
 .thankyou-notes {
@@ -413,13 +543,13 @@ body {
 .buttons {
     display: flex;
     flex-direction: row;
-    width: 100%;
+    width: var(--btns-width);
     justify-content: space-between;
     /* margin-top: 120px; */
     /* height: inherit; */
     /* border: solid 1px red; */
     position: absolute;
-    top: 488px;
+    top: var(--btns-top);
     align-self: flex-end;
 }
 
@@ -434,11 +564,11 @@ body {
     align-self: center;
     /* align-content: end; */
     text-align: center;
-    border-radius: 8px;
+    border-radius: var(--btns-radius);
     border: 0px;
     background-color: hsl(213.41deg 95.65% 18.04%);
     font-size: 15px;
-    padding: 16px 25px;
+    padding: var(--btns-padding);
 }
 
 .buttonLight {
@@ -458,8 +588,9 @@ body {
     width: fit-content;
     line-height: 13px;
     height: 15px;
-    font-size: 17px;
-    font-weight: 500;
+    font-size: 15px;
+    font-weight: 400;
+    letter-spacing: 0.01em;
 }
 
 .buttons button:nth-child(even):hover {
@@ -669,11 +800,13 @@ header {
 
 .form-container {
     width: 100%;
-    margin-top: 27px;
+    margin-top: var(--form-container-mt);
+    height: fit-content;
 }
 
 .form-control {
-    display: block;
+    display: var(--form-control-display);
+    flex-direction: var(--form-control-direction)
 }
 
 .form-control label, .form-control input {
@@ -690,12 +823,12 @@ header {
 }
 
 .form-container input {
-    width: 436px;
-    height: 27px;
+    width: var(--input-width);
+    height: var(--input-height); 
     border-radius: 8px;
     border: 1.95px solid hsl(228deg 14.29% 93.14%);
-    margin-top: 9px;
-    margin-bottom: 30px;
+    margin-top: var(--input-mt);
+    margin-bottom: var(--input-mb);
     padding: 10px 10px 10px 15px;
     line-height: 0px;
     cursor: pointer;

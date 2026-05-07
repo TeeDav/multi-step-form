@@ -6,6 +6,6 @@ export function checkoutValidation() {
         console.log(id)
         setReady(id);
 
-        window.dispatchEvent(new CustomEvent('nextPageReady', { detail: { id }}))
+        window.dispatchEvent(new CustomEvent('congratsPage', { detail: { id }}))
     })
 }
