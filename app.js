@@ -53,11 +53,11 @@ let pageHolder = [];
 
 setTimeout(() => {
     loadStore()
-}, 50)
+}, 100)
 
 setTimeout(() => {
     navigator()
-}, 100)
+}, 300)
 
 const container = document.getElementById('container-root');
 const containerChild = document.getElementById('container-child');
