@@ -51,13 +51,22 @@ let pageHolder = [];
 // }, 5000)
 //********************************************
 
-setTimeout(() => {
-    loadStore()
-}, 200)
+// Utility function for delays
+const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
-setTimeout(() => {
-    navigator()
-}, 800)
+// Async function to initialize with proper sequencing
+async function initializeApp() {
+    // Wait 200ms before loading store
+    await delay(200);
+    loadStore();
+    
+    // Wait additional 600ms (total 800ms from start) before navigator
+    await delay(600);
+    navigator();
+}
+
+// Call the initialization function
+initializeApp();
 
 const container = document.getElementById('container-root');
 const containerChild = document.getElementById('container-child');
