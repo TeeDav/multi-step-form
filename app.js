@@ -51,16 +51,13 @@ let pageHolder = [];
 // }, 5000)
 //********************************************
 
-// setTimeout(() => {
-//     loadStore()
-// }, 100)
+setTimeout(() => {
+    loadStore()
+}, 200)
 
-// setTimeout(() => {
-//     navigator()
-// }, 300)
-
-loadStore()
-navigator()
+setTimeout(() => {
+    navigator()
+}, 800)
 
 const container = document.getElementById('container-root');
 const containerChild = document.getElementById('container-child');
