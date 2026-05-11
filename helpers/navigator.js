@@ -24,7 +24,9 @@ var pageInitHolder = ''
 var validationInitHolder = ''
 
 //container where modules will be appended
+//this should run after DOMContentLoaded
 const containerChild = document.getElementById('container-child');
+console.log(containerChild)
 
 export async function navigator() {
     //should read 'pageInit' and 'validationInit' in pageStore
@@ -39,7 +41,11 @@ export async function navigator() {
     validationInitHolder = validationLoad;
 
     //bring in the new module
-    containerChild.appendChild(pageNav())
-    animation_.pageAnimIn(pageNav().getAttribute("id"))
-    validationLoad()
+    if (!containerChild.contains(pageInitHolder)) {
+        containerChild.appendChild(pageNav())
+        animation_.pageAnimIn(pageNav().getAttribute("id"))
+        validationLoad()
+    }
+
+    //send signal to module to confirm
 }

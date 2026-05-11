@@ -57,11 +57,12 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // Async function to initialize with proper sequencing
 async function initializeApp() {
     // Wait 200ms before loading store
-    await delay(200);
+    await delay(1);
     loadStore();
     
     // Wait additional 600ms (total 800ms from start) before navigator
-    await delay(600);
+    await delay(8000);
+    console.log('run navigator')
     navigator();
 }
 

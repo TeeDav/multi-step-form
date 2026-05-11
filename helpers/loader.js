@@ -28,6 +28,9 @@ export async function loadStore() {
     // in pageStore
     storeData.infoPageStore.pageInit = pageLoad
     storeData.infoPageStore.validationInit = validationLoad
+
+    //update store
+    // infoPageStore.loaded = true;
     
     console.log(storeData.infoPageStore)
 }
