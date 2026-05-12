@@ -1,5 +1,8 @@
 //inside 'loader', after reading details of 'pageSore'- 
 // (after validation of each page)
+//loader should also play loading animation of skeleton while loading
+//and then navigator should remove it after it has rendered the information.
+
 //say there's an import of pageStore
 //*************
 //import { infoPageStore } from "./pageStore.js";

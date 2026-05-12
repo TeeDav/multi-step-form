@@ -970,9 +970,30 @@ img {
 
 
 
+.skeleton {
+    animation: skeleton-loading 0.5s linear alternate-reverse infinite;
 
+    label, input {
+        background-color: #e3e0e0;
+        color: #e3e0e0 !important;
+        cursor: default;
+    }
 
+    label {
+        width: fit-content;
+        border-radius: 5px;
+    }
+}
 
+@keyframes skeleton-loading {
+	0% {
+        opacity: 1;
+		/* background-color: #e3e0e0; */
+	}
+	100% {
+        opacity: 0.325;
+	}
+}
 
 
 

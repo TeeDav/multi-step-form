@@ -4,6 +4,25 @@ function infoPage (){
     bodySection.classList.add("anim")
     bodySection.classList.add("noshow")
 
+    const skeletonSection = `<section id="info-page" class="anim">
+          <div class="form-container notes">
+            <form action="pages/select-your-plan.html" class="skeleton">
+              <div class="form-control">
+                <label for="name">Name</label>
+                <input type="text" name="name" placeholder="">
+              </div>
+              <div class="form-control">
+                <label for="email">Email Address</label>
+                <input type="email" name="email" id="" placeholder="">
+              </div>
+              <div class="form-control">
+                <label for="phone">Phone Number</label>
+                <input type="text" name="phone" id="" placeholder="">
+              </div>
+            </form>
+          </div>
+        </section>`
+
     const labelCopy = [
         'Name',
         'Email Address',
@@ -11,7 +30,7 @@ function infoPage (){
     ]
 
     const labelAttrs = [
-        'name',
+        'name',                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     
         'email',
         'phone'
     ]

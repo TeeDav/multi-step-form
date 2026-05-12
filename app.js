@@ -61,19 +61,19 @@ async function initializeApp() {
     loadStore();
     
     // Wait additional 600ms (total 800ms from start) before navigator
-    await delay(8000);
+    await delay(3000);
     console.log('run navigator')
     navigator();
 }
 
-// Call the initialization function
-initializeApp();
 
 const container = document.getElementById('container-root');
 const containerChild = document.getElementById('container-child');
 let headerSection
 
 let headerId = header().headerSection.id
+
+var skeletonHolder = ''
 
 document.addEventListener('DOMContentLoaded', () => {
     
@@ -96,6 +96,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // headerSection.classList.add('addClass')
     animation_.headerClassAdd() ? console.log('done') : console.log('not done')
     animation_.HeaderAnim(headerId)
+
+    skeletonHolder = document.createElement('div');
+    skeletonHolder.id = 'skeleton'
+    containerChild.appendChild(skeletonHolder)
+
+    // Call the initialization function
+    initializeApp();
+
 
     //dispatch the navigate event so that the infoPage() renders
     window.dispatchEvent(new CustomEvent('navigate', { detail: 1}))
