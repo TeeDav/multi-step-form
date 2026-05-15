@@ -43,8 +43,8 @@ export async function navigator() {
     //bring in the new module
     if (!containerChild.contains(pageInitHolder)) {
         //remove skeleton
-        const skeletonHold = document.getElementById('skeleton');
-        skeletonHold.innerHTML = '';
+        const skeleton = document.getElementById('skeleton');
+        skeleton.innerHTML = '';
 
         //containerChild.innerHTML = pageNav()
         containerChild.appendChild(pageNav())

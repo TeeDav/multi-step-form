@@ -58,3 +58,18 @@ let initLoad = async () => {
 
 //loader should import the modules of the next page after validati
 //of each page. 
+
+
+//thoughts***************
+
+//in pageStore.js there should be dedicated subscriber lists
+//for example, loader.js should a separate subscriber list
+//that navigator.js subscribes to, so that whenever loader.js loads
+//resources, it pushes a defined update or notification to its
+//subscribers.
+
+// there should be a state (e.g canNavigate() in validationState.js)
+// and service worker module that tracks the performance of the 
+// different modules to ensure that they work as orchestrated 
+// within a defined timeframe and issue retries when there is 
+// failure.

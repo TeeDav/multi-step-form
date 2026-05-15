@@ -26,6 +26,11 @@ import { sideAnimation } from "./animations/sideAnimation.js";
 import infoPageLoader from "./preLoaders/infoPreLoader.js";
 import { loadStore } from "./helpers/loader.js";
 import { navigator } from "./helpers/navigator.js";
+//import { pageState } from "./helpers/pageState.js";
+import { pageStateHelper } from "./helpers/pageStateHelper.js";
+
+
+//console.log(pageState().get())
 
 //import { infoPageStore } from "./helpers/pageStore.js";
 
@@ -64,6 +69,9 @@ async function initializeApp() {
     await delay(3000);
     console.log('run navigator')
     navigator();
+
+    await delay(6000)
+    pageStateHelper()
 }
 
 
