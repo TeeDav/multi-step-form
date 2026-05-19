@@ -18,13 +18,17 @@ let initialState = {
                     //for the next page when user clicks 'next'
 }
 
+let subscribers = new Set();
+console.log('declaring new set')
 
+let loaderList = new Set();
 
-export const pageState = (state = localStorage.getItem('pageState') || initialState) => {
+let navigatorList = new Set();
+
+export const stateInit = (state = JSON.parse(localStorage.getItem('pageState')) || initialState) => {
     
     if (state == initialState) {
-        state = {id: 23}
-        console.log(state)
+        console.log(localStorage.setItem('pageState', JSON.stringify(state)))
         localStorage.setItem('pageState', JSON.stringify(state)) ? console.log('localStorage') : console.log('no storage')
         let viewState = localStorage.getItem('pageState')
         console.log(viewState)
@@ -32,22 +36,47 @@ export const pageState = (state = localStorage.getItem('pageState') || initialSt
     
     function get() {
         return state
-    }
- 
-    let subscribers = new Set();
+    } 
 
     function unsubscribe(fn) {
         subscribers.delete(fn)
     }
 
-    function subscribe(fn) {
-        subscribers.add(fn)
-        return unsubscribe(fn)
+    function joinLoaderList(fn) {
+        console.log('subscriber added')
+        loaderList.add(fn)
+        //console.log(getSubscribers())
+        //return () => unsubscribe(fn)
     }
 
-    function notify() {
-        subscribers.forEach;((subscriber) => {
-            subscriber()
+    function joinNavigatorList(fn) {
+        console.log('navigator added added')
+        navigatorList.add(fn)
+        //console.log(getSubscribers())
+        //return () => unsubscribe(fn)
+    }
+
+    function getSubscribers() {
+        return subscribers
+    }
+
+    function notifyLoaderList() {
+        loaderList.forEach((subscriber) => {
+            try {
+                subscriber()
+            } catch(err) {
+                console.log(err)
+            }
+        })
+    }
+
+    function notifyNavigatorList() {
+        navigatorList.forEach((subscriber) => {
+            try {
+                subscriber()
+            } catch(err) {
+                console.log(err)
+            }
         })
     }
 
@@ -58,5 +87,11 @@ export const pageState = (state = localStorage.getItem('pageState') || initialSt
         notify()
     }
 
-    return { get, subscribe, notify, update }
+    return { 
+        get, joinLoaderList, notifyLoaderList, 
+        joinNavigatorList, notifyNavigatorList, 
+        update, subscribers, getSubscribers 
+    }
 }
+
+export const pageState = stateInit()

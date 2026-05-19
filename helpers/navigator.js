@@ -8,9 +8,17 @@
 
 //inside 'navigator'
 //say there's an import of pageStore
-import { infoPageStore } from "./pageStore.js";
-import animation_ from "../animations/pageTransitions.js";
+//import { infoPageStore } from "./pageStore.js";
 
+import { pageState } from "./pageState.js"
+// import { pageState } from "./stateInit.js"
+
+// import { pageState } from "./stateInit.js";
+
+import animation_ from "../animations/pageTransitions.js";
+console.log('navigator imported')
+
+let state = pageState
 
 //subscribe to pageStore so that navigator functions runs whenever the next page has beeen
 //lazy loaded and the current page has been validated
@@ -25,13 +33,19 @@ var validationInitHolder = ''
 
 //container where modules will be appended
 //this should run after DOMContentLoaded
-const containerChild = document.getElementById('container-child');
-console.log(containerChild)
-
 export async function navigator() {
+    //read data: get state from pageState
+    let readState = state.get()
+
+    const containerChild = document.getElementById('container-child');
+    console.log(containerChild)
+
     //should read 'pageInit' and 'validationInit' in pageStore
-    let pageNav = infoPageStore.pageInit;
-    let validationLoad = infoPageStore.validationInit;
+    // let pageNav = infoPageStore.pageInit;
+    // let validationLoad = infoPageStore.validationInit;
+
+    let pageNav = readState.pageInit;
+    let validationLoad = readState.validationInit;
 
     if (!(pageInitHolder == '')) {
         pageInitHolder.remove()
@@ -54,3 +68,5 @@ export async function navigator() {
 
     //send signal to module to confirm
 }
+
+let unsubscribe = state.joinNavigatorList(navigator);

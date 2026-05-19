@@ -24,10 +24,12 @@ import { checkoutValidation } from "./validation/checkoutValidation.js";
 import { sideAnimation } from "./animations/sideAnimation.js";
 
 import infoPageLoader from "./preLoaders/infoPreLoader.js";
-import { loadStore } from "./helpers/loader.js";
-import { navigator } from "./helpers/navigator.js";
+
 //import { pageState } from "./helpers/pageState.js";
+// import { stateInit } from "./helpers/stateInit.js";
 import { pageStateHelper } from "./helpers/pageStateHelper.js";
+import { loader } from "./helpers/loader.js";
+import { navigator } from "./helpers/navigator.js";
 
 
 //console.log(pageState().get())
@@ -62,15 +64,13 @@ const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 // Async function to initialize with proper sequencing
 async function initializeApp() {
     // Wait 200ms before loading store
-    await delay(1);
-    loadStore();
+    //await delay(1);
+    //loadStore();
     
     // Wait additional 600ms (total 800ms from start) before navigator
-    await delay(3000);
-    console.log('run navigator')
-    navigator();
-
-    await delay(6000)
+    // await delay(3000);
+    // console.log('run navigator')
+    // navigator();
     pageStateHelper()
 }
 
@@ -79,7 +79,7 @@ const container = document.getElementById('container-root');
 const containerChild = document.getElementById('container-child');
 let headerSection
 
-let headerId = header().headerSection.id
+let headerId = header(1).headerSection.id
 
 var skeletonHolder = ''
 

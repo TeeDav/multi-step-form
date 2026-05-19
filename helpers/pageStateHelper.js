@@ -5,16 +5,25 @@
 //update pageStore after every navigation
 
 
-import { infoPageStore } from "./pageStore.js"
+// import { infoPageStore } from "./pageStore.js"
 import { pageState } from "./pageState.js"
+// import { pageState } from "./stateInit.js"
 
-let pageHelper = pageState()
 
-// pageState().update(newState);
+console.log('page state helper')
+// import { pageState } from "./pageState.js"
+
+// let state = pageState()
+
+//read curent state from store and decide what page to load
 
 export function pageStateHelper() {
 
-    //console.log(pageState)
+    let state = pageState
+
+
+    console.log(state)
+
     let newState = {
         pageId: '',
         hasValidation: '',
@@ -32,5 +41,13 @@ export function pageStateHelper() {
         nextPageInit: ''
     }
 
-    pageHelper.update(infoPageStore)
+    //state.subscribe('added subscriber')
+    //console.log(state.getSubscribers())
+    //console.log(state.subscribers)
+
+
+    // let currentState = state.get()
+    
+    //send a notification to loader to load the current page
+    state.notifyLoaderList();
 }

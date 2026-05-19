@@ -18,7 +18,7 @@ let pageState = {
     nextPageInit: ''
 }
 
- export let infoPageStore = {
+const infoPageStore = {
     pageName: 'infoPage',
     pageId: '#0034abc45',
     hasValidation: true,
@@ -38,20 +38,25 @@ let pageState = {
                     //for the next page when user clicks 'next'
 }
 
-//  let plansPageStore = {
-//     pageName: 'plansPage',
-//     pageId: '#0234rdf89',
-//     hasValidation: true,
-//     validateOn: 'focusOut',
-//     validated: false,
-//     lazyLoaded: false,
-//     loaded: false,
-//     currentPage: false,
-//     nextPage: 'plansPage',
-//     nextPageId: '#0234rdf89',
-//     importPath: "console.log('yayo')",
-//     initPath: "./pages/infoPage.js"
-// }
+ const plansPageStore = {
+    pageName: 'plansPage',
+    pageId: '#0234rdf89',
+    hasValidation: true,
+    validateOn: 'focusOut',
+    validated: false,
+    lazyLoaded: false,
+    loaded: false,
+    currentPage: false,
+    pageLoaderName: 'plansPageLoader',
+    importPath: "../preLoaders/plans.js", //loader
+    pageInit: "", //navigator
+    validationInit: '', //navigator
+    nextPage: 'addons',
+    nextPageId: 'addons.pageId',
+    nextPagePath: 'addons.importPath', //'loader' uses this to lazy load
+    nextPageInit: '' //'loader' stores loaded module here, and navigator should use this to mount stuff
+}
+
 
 //'loader' should import a fn that holds the page and its
 //validation logic
