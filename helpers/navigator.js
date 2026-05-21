@@ -67,6 +67,8 @@ export async function navigator() {
     }
 
     //send signal to module to confirm
+    //notify loader
+    state.notifyLoaderList()
 }
 
 let unsubscribe = state.joinNavigatorList(navigator);

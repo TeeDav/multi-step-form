@@ -1,7 +1,9 @@
 //pageStore should default to details of infoPage on forst load, and when 
 //no data is found in localStorage
 
-let pageState = {
+import { PageList } from "../pageList.js"
+
+const pageState = {
     pageId: '',
     hasValidation: '',
     validateOn: '',
@@ -57,6 +59,13 @@ const infoPageStore = {
     nextPageInit: '' //'loader' stores loaded module here, and navigator should use this to mount stuff
 }
 
+const pageArray = [
+    infoPageStore,
+    plansPageStore
+]
+
+export const pageStore = new PageList()
+pageStore.insertArray(pageArray)
 
 //'loader' should import a fn that holds the page and its
 //validation logic

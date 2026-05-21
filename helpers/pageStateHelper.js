@@ -7,10 +7,18 @@
 
 // import { infoPageStore } from "./pageStore.js"
 import { pageState } from "./pageState.js"
+//import { pages } from "../pageList.js"
 // import { pageState } from "./stateInit.js"
+import { pageStore } from "./pageStore.js"
 
 
 console.log('page state helper')
+
+pageStore.setCurrentPage('#0034abc45')
+console.log(pageStore.currentPage.nextPage.page)
+// pages.display()
+// pages.setCurrentPage('767673')
+// console.log(pages.currentPage)
 // import { pageState } from "./pageState.js"
 
 // let state = pageState()

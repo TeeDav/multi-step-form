@@ -12,7 +12,8 @@
 //const unsubscribe = pageStore.subscribe(loadStore)
 
 // import { pageState } from "./pageState.js";
-import { pageState } from "./pageState.js"
+import { pageState } from "./pageState.js";
+import { pageStore } from "./pageStore.js";
 
 console.log('loader imported')
 
@@ -51,15 +52,22 @@ export const loader = async () =>  {
 
     //after importing, write the details to 'initPath' and 'validationInit'
     // in pageStore
-    readState.pageInit = pageLoad
-    readState.validationInit = validationLoad
+    if (readState.loaded == false) {
+        readState.pageInit = pageLoad
+        readState.validationInit = validationLoad
 
-    //update store
-    readState.loaded = true;
-    
-    //console.log(readState)
+        //update store
+        readState.loaded = true;
+        
+        //console.log(readState)
 
-    state.notifyNavigatorList()
+        state.notifyNavigatorList()
+    } else {
+        const page = pageStore.currentPage.nextPage.page
+        page.pageInit = pageLoad
+        page.validationInit = validationLoad
+        state.notifyManager()
+    }
 }
 
 let runLoadStore = loader
