@@ -1,6 +1,9 @@
 import { Validator } from "./validationHelper.js";
 import { validationScrits } from "./validationScripts.js";
 import { setReady, unsetReady } from "./validationState.js";
+import { pageState } from "../helpers/pageState.js";
+import { pageStore } from "../helpers/pageStore.js";
+import { infoPageStore } from "../helpers/pageStore.js";
 
 function infoValidation () {
     console.log('hi')
@@ -57,22 +60,33 @@ function infoValidation () {
         }
 
         if ((validatePhone.isValid == true) && (validateEmail.isValid == true)) {
-        console.log(`x is ${x}`)
-        infoPageReady = true
-        
-        unsetReady();
-        const id = crypto.randomUUID();
-        console.log(id)
-        setReady(id);
+            //update validation in state to true
+            let state = pageState.get()
+            console.log(pageStore.currentPage.page.pageId, infoPageStore.pageId)
+            if (pageStore.currentPage.page.pageId == infoPageStore.pageId) {
+                state.validated = true
+                console.log('id correct', state)
+            }
 
-        window.dispatchEvent(new CustomEvent('nextPageReady', { detail: { id }})) 
-        //nextDispatched = true
-        
-        return
+            console.log(`x is ${x}`)
+            infoPageReady = true
+            
+            unsetReady();
+            const id = crypto.randomUUID();
+            console.log(id)
+            setReady(id);
+
+            window.dispatchEvent(new CustomEvent('nextPageReady', { detail: { id }})) 
+            //nextDispatched = true
+            
+            return
     } //else {
     //     window.dispatchEvent(new CustomEvent('nextPageReady', { detail: infoPageReady}))  
     // }
     })
+
+    //add a subscriber to display err message when next button is clicked
+    //without validation
 }
 
 export { infoValidation }

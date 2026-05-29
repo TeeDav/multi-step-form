@@ -20,7 +20,7 @@ const pageState = {
     nextPageInit: ''
 }
 
-const infoPageStore = {
+export const infoPageStore = {
     pageName: 'infoPage',
     pageId: '#0034abc45',
     hasValidation: true,
@@ -28,6 +28,7 @@ const infoPageStore = {
     validated: false,
     lazyLoaded: false,
     loaded: false,
+    loading: false,
     currentPage: false,
     pageLoaderName: 'infoPageLoader',
     importPath: "../preLoaders/infoPreLoader.js", //loader
@@ -48,6 +49,7 @@ const infoPageStore = {
     validated: false,
     lazyLoaded: false,
     loaded: false,
+    loading: false,
     currentPage: false,
     pageLoaderName: 'plansPageLoader',
     importPath: "../preLoaders/plans.js", //loader

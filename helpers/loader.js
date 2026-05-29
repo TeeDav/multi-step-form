@@ -17,59 +17,59 @@ import { pageStore } from "./pageStore.js";
 
 console.log('loader imported')
 
-let state = pageState
-
-// let readState = state.get()
-
-// pageState().subscribe('added subscriber')
-// console.log(pageState().getSubscribers())
-//console.log(pageState().subscribe(loadStore))
+let tezzio = pageState
 
 export const loader = async () =>  {
-    //if (!(notification) == 'notifyLoader') return
-
-    //this line models reading data from pageStore as a subscriber
-    // const storeData = await import("../helpers/pageStore.js");
-
-    //import 
-    //let { default: pageLoader } = await import(storeData.infoPageStore.importPath);
-
     //read data: get state from pageState
-    let readState = state.get()
+    let state = tezzio.get()
+
+    //details of next page  
+    const page = pageStore.currentPage.nextPage.page
 
     //import
-    console.log(readState)
-    let { default: pageLoader } = await import(readState.loaded ? readState.nextPagePath : readState.importPath);
+    console.log(state)
+
+    if (state.loaded == false) {
+        state.loading = true
+    } else {
+        page.loading = true
+    }
+
+    let { default: pageLoader } = await import(state.loaded ? page.importPath : state.importPath);
 
 
     //read name of the module from the store
     //let loadHandler = storeData.infoPageStore.pageLoaderName;
     console.log(pageLoader)
 
+    //add spinner here
+    //
+
     let { pageLoad, validationLoad } = await pageLoader()
-    // console.log(await pageLoader())
-    // console.log(pageLoad, validationLoad)
 
     //after importing, write the details to 'initPath' and 'validationInit'
     // in pageStore
-    if (readState.loaded == false) {
-        readState.pageInit = pageLoad
-        readState.validationInit = validationLoad
-
-        //update store
-        readState.loaded = true;
+    if (state.loaded == false) {
+        state.pageInit = pageLoad
+        state.validationInit = validationLoad
         
-        //console.log(readState)
-
-        state.notifyNavigatorList()
+        //update state
+        state.loading = false //not loading
+        state.loaded = true;
+        
+        //notify navigator
+        tezzio.notifyNavList()
     } else {
-        const page = pageStore.currentPage.nextPage.page
-        page.pageInit = pageLoad
-        page.validationInit = validationLoad
-        state.notifyManager()
+        try {
+            page.pageInit = pageLoad
+            page.validationInit = validationLoad
+            page.loading = false //not loading
+            page.loaded = false
+            //tezzio.notifyManager() this should stop the spinner animation
+        } catch (err) {
+            console.log(err)
+        }
     }
 }
-
-let runLoadStore = loader
-let unsubscribe = state.joinLoaderList(runLoadStore)
+let unsubscribe = tezzio.loaderList_add(loader)
 

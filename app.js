@@ -12,7 +12,6 @@ import animation_ from "./animations/pageTransitions.js";
 //import { infoValidation } from "./validation/infoValidation.js";
 
 import { navHelper } from "./validation/navHelper.js";
-navHelper()
 
 import { planValidation } from "./validation/planValidation.js";
 planValidation()
@@ -30,7 +29,7 @@ import infoPageLoader from "./preLoaders/infoPreLoader.js";
 import { pageStateHelper } from "./helpers/pageStateHelper.js";
 import { loader } from "./helpers/loader.js";
 import { navigator } from "./helpers/navigator.js";
-
+import { manager } from "./helpers/manager.js";
 
 //console.log(pageState().get())
 
@@ -108,6 +107,8 @@ document.addEventListener('DOMContentLoaded', () => {
     skeletonHolder = document.createElement('div');
     skeletonHolder.id = 'skeleton'
     containerChild.appendChild(skeletonHolder)
+
+    navHelper()
 
     // Call the initialization function
     initializeApp();

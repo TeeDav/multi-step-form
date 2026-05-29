@@ -11,6 +11,7 @@
 //import { infoPageStore } from "./pageStore.js";
 
 import { pageState } from "./pageState.js"
+import { spinner } from "./spinnerState.js";
 // import { pageState } from "./stateInit.js"
 
 // import { pageState } from "./stateInit.js";
@@ -66,9 +67,16 @@ export async function navigator() {
         validationLoad()
     }
 
+    //stop the spinner
+    if(spinner.getState()) {
+        spinner.setState(false)
+    }
+
     //send signal to module to confirm
     //notify loader
-    state.notifyLoaderList()
+    //state.notifyLoaderList()
+    state.notifyManager()
+
 }
 
-let unsubscribe = state.joinNavigatorList(navigator);
+let unsubscribe = state.joinNavList(navigator);

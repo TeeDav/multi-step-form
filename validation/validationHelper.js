@@ -155,8 +155,8 @@ class Validator {
             }
 
             if (this.isValid == true) {
-            window.dispatchEvent(new CustomEvent(this.pageReady))
-            console.log('end true')
+            //window.dispatchEvent(new CustomEvent(this.pageReady))
+            console.log('true')
             return true
             } else if (this.isValid == false) {
                 console.log('end false')

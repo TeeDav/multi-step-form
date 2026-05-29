@@ -18,18 +18,18 @@ let initialState = {
                     //for the next page when user clicks 'next'
 }
 
-let subscribers = new Set();
+let Manager = new Set();
 console.log('declaring new set')
 
 let loaderList = new Set();
 
 let navigatorList = new Set();
 
-export const stateInit = (state = JSON.parse(localStorage.getItem('pageState')) || initialState) => {
+export const stateInit = async (state = JSON.parse(localStorage.getItem('pageState')) || initialState) => {
     
     if (state == initialState) {
         console.log(localStorage.setItem('pageState', JSON.stringify(state)))
-        localStorage.setItem('pageState', JSON.stringify(state)) ? console.log('localStorage') : console.log('no storage')
+        localStorage.setItem('pageState', JSON.stringify(state))
         let viewState = localStorage.getItem('pageState')
         console.log(viewState)
     }
@@ -39,17 +39,24 @@ export const stateInit = (state = JSON.parse(localStorage.getItem('pageState')) 
     } 
 
     function unsubscribe(fn) {
-        subscribers.delete(fn)
+        //subscribers.delete(fn)
     }
 
-    function joinLoaderList(fn) {
+    function manager_add(fn) {
+        console.log('manager added')
+        Manager.add(fn)
+        //console.log(getSubscribers())
+        //return () => unsubscribe(fn)
+    }
+
+    function loaderList_add(fn) {
         console.log('subscriber added')
         loaderList.add(fn)
         //console.log(getSubscribers())
         //return () => unsubscribe(fn)
     }
 
-    function joinNavigatorList(fn) {
+    function joinNavList(fn) {
         console.log('navigator added added')
         navigatorList.add(fn)
         //console.log(getSubscribers())
@@ -57,7 +64,17 @@ export const stateInit = (state = JSON.parse(localStorage.getItem('pageState')) 
     }
 
     function getSubscribers() {
-        return subscribers
+        //return subscribers
+    }
+
+    function notifyManager(param) {
+        Manager.forEach((subscriber) => {
+            try {
+                subscriber(param)
+            } catch(err) {
+                console.log(err)
+            }
+        })
     }
 
     function notifyLoaderList() {
@@ -70,7 +87,7 @@ export const stateInit = (state = JSON.parse(localStorage.getItem('pageState')) 
         })
     }
 
-    function notifyNavigatorList() {
+    function notifyNavList() {
         navigatorList.forEach((subscriber) => {
             try {
                 subscriber()
@@ -88,10 +105,11 @@ export const stateInit = (state = JSON.parse(localStorage.getItem('pageState')) 
     }
 
     return { 
-        get, joinLoaderList, notifyLoaderList, 
-        joinNavigatorList, notifyNavigatorList, 
-        update, subscribers, getSubscribers 
+        get, manager_add, notifyManager, 
+        loaderList_add, notifyLoaderList, 
+        joinNavList, notifyNavList, 
+        update, getSubscribers 
     }
 }
 
-export const pageState = stateInit()
+export const pageState = await stateInit()
