@@ -1,8 +1,8 @@
 function selectPlanPage (){
-    const section = document.createElement('section');
-    section.id = 'select-plan'
-    section.classList.add('anim')
-    section.classList.add('noshow')
+    const bodySection = document.createElement('section');
+    bodySection.id = 'select-plan'
+    bodySection.classList.add('anim')
+    bodySection.classList.add('noshow')
 
     // container equivalent
     const containerBody = document.createElement('div')
@@ -103,7 +103,7 @@ function selectPlanPage (){
     containerChild.appendChild(sectionNode)
     // containerChild.appendChild(nav)
     containerBody.appendChild(containerChild)
-    section.appendChild(sectionNode)
+    bodySection.appendChild(sectionNode)
 
 
     //
@@ -162,25 +162,27 @@ function selectPlanPage (){
     let storeFocus;
     let keepFocus;
 
-    for(let i=0; i<cardArr.length; i++) {
-        let u = i;
-        let z;
-        cardArr[i].addEventListener("click", function (e) {
-            cardArr[u].classList.add('focused');
-            console.log(e.target)
-            storeFocus = e.target;
-            e.stopPropagation();
-            keepFocus = document.activeElement; //the element that has focus in the browser
-            console.log(keepFocus);
-            for (z=0; z<cardArr.length; z++) {
-                cardArr[z].classList.remove('focused');
-                if (u == z) {
-                    cardArr[z].classList.add('focused');
-                    window.dispatchEvent(new CustomEvent('plansPageReady'))
-                }
-            }
-        }, false);     
-    }
+
+    /**************validation here**********************/
+    // for(let i=0; i<cardArr.length; i++) {
+    //     let u = i;
+    //     let z;
+    //     cardArr[i].addEventListener("click", function (e) {
+    //         cardArr[u].classList.add('focused');
+    //         console.log(e.target)
+    //         storeFocus = e.target;
+    //         e.stopPropagation();
+    //         keepFocus = document.activeElement; //the element that has focus in the browser
+    //         console.log(keepFocus);
+    //         for (z=0; z<cardArr.length; z++) {
+    //             cardArr[z].classList.remove('focused');
+    //             if (u == z) {
+    //                 cardArr[z].classList.add('focused');
+    //                 window.dispatchEvent(new CustomEvent('plansPageReady'))
+    //             }
+    //         }
+    //     }, false);     
+    // }
 
 
     document.body.addEventListener("click", function (e){
@@ -191,7 +193,7 @@ function selectPlanPage (){
 
     //
 
-    return { section, childToggle, cardArr, toggle  }
+    return bodySection;
 }
 
 export { selectPlanPage }

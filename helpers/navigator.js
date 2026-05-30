@@ -11,6 +11,7 @@
 //import { infoPageStore } from "./pageStore.js";
 
 import { pageState } from "./pageState.js"
+import { pageStore } from "./pageStore.js";
 import { spinner } from "./spinnerState.js";
 // import { pageState } from "./stateInit.js"
 
@@ -29,14 +30,20 @@ let state = pageState
 //there's a change in pageStore
 
 //initialize a holder for pageInit and validationInit
-var pageInitHolder = ''
-var validationInitHolder = ''
+let pageInitHolder = null
+let validationInitHolder = null
 
 //container where modules will be appended
 //this should run after DOMContentLoaded
 export async function navigator() {
     //read data: get state from pageState
     let readState = state.get()
+    console.log(readState)
+
+    //get details of page to be removed. state has been updated
+    //to next page
+    let prevState = pageStore.currentPage.prevPage.page
+
 
     const containerChild = document.getElementById('container-child');
     console.log(containerChild)
@@ -45,22 +52,46 @@ export async function navigator() {
     // let pageNav = infoPageStore.pageInit;
     // let validationLoad = infoPageStore.validationInit;
 
+    //get page and validation init from state
     let pageNav = readState.pageInit;
+    console.log(readState)
+    console.log(pageNav)
     let validationLoad = readState.validationInit;
-
-    if (!(pageInitHolder == '')) {
-        pageInitHolder.remove()
-    }
 
     pageInitHolder = document.getElementById(pageNav);
     validationInitHolder = validationLoad;
 
-    //bring in the new module
+    let removePage = ''
+    //remove page
+    if (!(prevState == 'head')) {
+        console.log(readState)
+        // if (readState.fromStorage) return
+        try {
+            removePage = prevState.pageInit()
+            console.log(removePage)
+            let pageId
+            typeof(removePage) == 'object' ? pageId = document.getElementById(eval(removePage).getAttribute('id')) 
+            : pageId = document.getElementById(removePage)
+            // let pageHolder = document.getElementById(removePage);
+            console.log(pageId)
+            pageId.remove()
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
+    // if (!(pageInitHolder == null)) {
+    //     console.log(pageInitHolder)
+    //     pageInitHolder.remove()
+    // }
+
+    //bring in the new page
     if (!containerChild.contains(pageInitHolder)) {
         //remove skeleton
         const skeleton = document.getElementById('skeleton');
         skeleton.innerHTML = '';
 
+        console.log(pageNav)
         //containerChild.innerHTML = pageNav()
         containerChild.appendChild(pageNav())
         animation_.pageAnimIn(pageNav().getAttribute("id"))
@@ -72,9 +103,7 @@ export async function navigator() {
         spinner.setState(false)
     }
 
-    //send signal to module to confirm
-    //notify loader
-    //state.notifyLoaderList()
+    //notify manager
     state.notifyManager()
 
 }

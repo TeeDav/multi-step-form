@@ -52,7 +52,7 @@ export const infoPageStore = {
     loading: false,
     currentPage: false,
     pageLoaderName: 'plansPageLoader',
-    importPath: "../preLoaders/plans.js", //loader
+    importPath: "../preLoaders/plansPreLoader.js", //loader
     pageInit: "", //navigator
     validationInit: '', //navigator
     nextPage: 'addons',
@@ -61,9 +61,32 @@ export const infoPageStore = {
     nextPageInit: '' //'loader' stores loaded module here, and navigator should use this to mount stuff
 }
 
+ const addonsStore = {
+    pageName: 'addonPage',
+    pageId: '#0256rdf89',
+    hasValidation: true,
+    validateOn: 'focusOut',
+    validated: false,
+    lazyLoaded: false,
+    loaded: false,
+    loading: false,
+    currentPage: false,
+    pageLoaderName: 'plansPageLoader',
+    importPath: "./fg.js", //loader
+    pageInit: "", //navigator
+    validationInit: '', //navigator
+    nextPage: 'addons',
+    nextPageId: 'addons.pageId',
+    nextPagePath: 'addons.importPath', //'loader' uses this to lazy load
+    nextPageInit: '' //'loader' stores loaded module here, and navigator should use this to mount stuff
+}
+
+
 const pageArray = [
     infoPageStore,
-    plansPageStore
+    plansPageStore,
+    addonsStore
+    
 ]
 
 export const pageStore = new PageList()

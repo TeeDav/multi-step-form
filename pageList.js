@@ -61,17 +61,19 @@ function setCurrentPage(pageId) {
 
 function nextPage() {
     let currentPage = this.currentPage
-    while (!(currentPage.nextPage == null)) {
+    if (!(currentPage.nextPage == null)) {
         currentPage = currentPage.nextPage
     }
+    this.currentPage = currentPage
     return currentPage.page
 }
 
 function prevPage() {
     let currentPage = this.currentPage
-    while (!(currentPage.prevPage == this.head)) {
+    if (!(currentPage.prevPage == this.head)) {
         currentPage = currentPage.prevPage
     }
+    this.currentPage = currentPage
     return currentPage.page
 }
 

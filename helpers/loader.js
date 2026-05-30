@@ -63,9 +63,11 @@ export const loader = async () =>  {
         try {
             page.pageInit = pageLoad
             page.validationInit = validationLoad
-            page.loading = false //not loading
-            page.loaded = false
+            page.loading = 'true' //not loading
+            page.loaded = true
+            console.log(page)
             //tezzio.notifyManager() this should stop the spinner animation
+            //tezzio.notifyManager()
         } catch (err) {
             console.log(err)
         }

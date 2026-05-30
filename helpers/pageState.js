@@ -27,11 +27,21 @@ let navigatorList = new Set();
 
 export const stateInit = async (state = JSON.parse(localStorage.getItem('pageState')) || initialState) => {
     
+    function update(newState) {
+        state = { ...state, ...newState }
+        console.log(get())
+        localStorage.setItem('pageState', JSON.stringify(state))
+        console.log(state)
+        //notify()
+    }
+
     if (state == initialState) {
         console.log(localStorage.setItem('pageState', JSON.stringify(state)))
         localStorage.setItem('pageState', JSON.stringify(state))
         let viewState = localStorage.getItem('pageState')
         console.log(viewState)
+    } else {
+        update({ loaded: false, fromStorage: true })
     }
     
     function get() {
@@ -97,12 +107,7 @@ export const stateInit = async (state = JSON.parse(localStorage.getItem('pageSta
         })
     }
 
-    function update(newState) {
-        state = { ...newState }
-        localStorage.setItem('pageState', JSON.stringify(state))
-        console.log(state)
-        notify()
-    }
+    
 
     return { 
         get, manager_add, notifyManager, 

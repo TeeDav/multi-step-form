@@ -1,6 +1,8 @@
 import { navPages } from "../server.js";
 import { canNavigate, unsetReady } from "./validationState.js";
 import { pageState } from "../helpers/pageState.js";
+import { pageStore } from "../helpers/pageStore.js";
+import { spinner } from "../helpers/spinnerState.js";
 
 let tezzio = pageState
 let state = tezzio.get()
@@ -70,22 +72,29 @@ export function navHelper() {
   navHolder.childNodes[1].addEventListener('click', () => {
     console.log('next button clicked')
 
-    //call manager here
-    let source = 'btnClick'
-    tezzio.notifyManager(source)
+    if (state.validated == true) {
+        //display spinner
+        spinner.setState(true)
+
+        //save current state in pageStore. use update
+        pageStore.currentPage.page = state
+        
+        //push details of next page from store to state
+        tezzio.update(pageStore.nextPage())
+        //state = pageStore.nextPage()
+        console.log(state)
+        //pageStore.nextPage()
+        console.log(pageStore.currentPage.page)
+
+        //call navigator
+        tezzio.notifyNavList()
+    }
   })
-  
-  if (state.validated == true) {
-    
-
-  } else{
-
-  }
 
   //create spinner
-  let spinner = document.createElement('span')
-  spinner.id = 'spinner'
-  spinner.classList.add('btn-spinner')
-  spinner.innerText = ''
-  navHolder.childNodes[1].appendChild(spinner)
+  let _spinner = document.createElement('span')
+  _spinner.id = 'spinner'
+  _spinner.classList.add('btn-spinner')
+  _spinner.innerText = ''
+  navHolder.childNodes[1].appendChild(_spinner)
 }

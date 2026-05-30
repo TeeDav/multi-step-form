@@ -13,8 +13,8 @@ import animation_ from "./animations/pageTransitions.js";
 
 import { navHelper } from "./validation/navHelper.js";
 
-import { planValidation } from "./validation/planValidation.js";
-planValidation()
+// import { planValidation } from "./validation/plansValidation.js";
+// plansValidation()
 
 import { addonValidation } from "./validation/addonValidation.js";
 
@@ -173,13 +173,13 @@ window.addEventListener('navigate', (e) => {
     // You can expand this with AJAX or templates
     switch(e.detail) {
         case 1: //render infoPage
-            if (pageHolder == []) break;
-            console.log(pageHolder)
-            if (!(pageHolder == [])) {
-                containerChild.appendChild(pageHolder())
-            }
-            animation_.pageAnimIn(pageHolder().getAttribute("id"))
-            infoValidation()
+            // if (pageHolder == []) break;
+            // console.log(pageHolder)
+            // if (!(pageHolder == [])) {
+            //     containerChild.appendChild(pageHolder())
+            // }
+            // animation_.pageAnimIn(pageHolder().getAttribute("id"))
+            // infoValidation()
             //window.dispatchEvent(new CustomEvent('infoPageValidation'))
             break;
         case 2:
