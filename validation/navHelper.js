@@ -72,15 +72,23 @@ export function navHelper() {
   navHolder.childNodes[1].addEventListener('click', () => {
     console.log('next button clicked')
 
-    if (state.validated == true) {
+    if (tezzio.get().validated == true) {
         //display spinner
         spinner.setState(true)
 
         //save current state in pageStore. use update
-        pageStore.currentPage.page = state
+        // pageStore.currentPage.page = tezzio.get()
+        tezzio = pageState
+        state = tezzio.get()
+        console.log(tezzio.get())
+        pageStore.updateCurrentPage(tezzio.get())
+        console.log(pageStore)
+        console.log(pageStore.currentPage)
         
-        //push details of next page from store to state
-        tezzio.update(pageStore.nextPage())
+        // //push details of next page from store to state
+        // tezzio.update(pageStore.currentPage.nextPage.page)
+        console.log(tezzio.get())
+
         //state = pageStore.nextPage()
         console.log(state)
         //pageStore.nextPage()

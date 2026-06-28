@@ -14,28 +14,23 @@ import { spinner } from "./spinnerState.js"
 
 let tezzio = pageState
 let state = tezzio.get()
-
+let firstLoad = true
 // pageStore.setCurrentPage(state.pageId)
 
 
 export const manager = (source) => {
     console.log('manager working')
     console.log(source)
-    //console.log(document.getElementsByClassName('form-control'))
 
-    //details of next page  
-    //const page = pageStore.currentPage.nextPage.page
-
-    console.log(state.validated)
-    //check if validation is true
-    // if ((state.validated == true) && (source == 'btnClick')) {
-    //     //display spinner
-    //     spinner.setState(true)
-    // }
+    if (firstLoad){
+        // pageStore.setCurrentPage(state.pageId)
+        // tezzio.notifyLoaderList();
+        // firstLoad = false
+    }
 
     //call loader to start importing module of next page
     try {
-        tezzio.notifyLoaderList()
+        //tezzio.notifyLoaderList()
     } catch(err) {
         console.log(err)
     }

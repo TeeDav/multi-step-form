@@ -29,7 +29,7 @@ export const stateInit = async (state = JSON.parse(localStorage.getItem('pageSta
     
     function update(newState) {
         state = { ...state, ...newState }
-        console.log(get())
+        //console.log(get())
         localStorage.setItem('pageState', JSON.stringify(state))
         console.log(state)
         //notify()
@@ -42,6 +42,7 @@ export const stateInit = async (state = JSON.parse(localStorage.getItem('pageSta
         console.log(viewState)
     } else {
         update({ loaded: false, fromStorage: true })
+        console.log(get())
     }
     
     function get() {

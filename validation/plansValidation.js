@@ -30,7 +30,8 @@ export function plansValidation() {
 
                     //validation is true here, update state
                     tezzio.update({validated: true})
-                    console.log('id correct', state)
+                    tezzio.notifyLoaderList()
+                    console.log('id correct', tezzio.get())
                     // if (pageStore.currentPage.page.pageId == plansPageStore.pageId) {
                         
                     // }

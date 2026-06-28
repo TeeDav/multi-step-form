@@ -13,6 +13,8 @@
 import { pageState } from "./pageState.js"
 import { pageStore } from "./pageStore.js";
 import { spinner } from "./spinnerState.js";
+import { waitForLoader, createSignal } from "./signal.js"
+
 // import { pageState } from "./stateInit.js"
 
 // import { pageState } from "./stateInit.js";
@@ -20,7 +22,7 @@ import { spinner } from "./spinnerState.js";
 import animation_ from "../animations/pageTransitions.js";
 console.log('navigator imported')
 
-let state = pageState
+let tezzio = pageState
 
 //subscribe to pageStore so that navigator functions runs whenever the next page has beeen
 //lazy loaded and the current page has been validated
@@ -32,18 +34,33 @@ let state = pageState
 //initialize a holder for pageInit and validationInit
 let pageInitHolder = null
 let validationInitHolder = null
+let firstLoad = true;
 
 //container where modules will be appended
 //this should run after DOMContentLoaded
 export async function navigator() {
     //read data: get state from pageState
-    let readState = state.get()
-    console.log(readState)
+    // let state = tezzio.get()
 
-    //get details of page to be removed. state has been updated
-    //to next page
-    let prevState = pageStore.currentPage.prevPage.page
+    console.log(waitForLoader)
 
+    //wait for loader to finish
+    const baton = await waitForLoader()
+    createSignal()
+
+    //page to be added
+    let state = pageStore.currentPage.nextPage.page
+    console.log(state)
+
+    if (firstLoad) {
+        state = tezzio.get()
+        // firstLoad = false
+    }
+    
+
+    //get details of page to be removed
+    let prevState = pageStore.currentPage.page
+    console.log(prevState)
 
     const containerChild = document.getElementById('container-child');
     console.log(containerChild)
@@ -53,10 +70,10 @@ export async function navigator() {
     // let validationLoad = infoPageStore.validationInit;
 
     //get page and validation init from state
-    let pageNav = readState.pageInit;
-    console.log(readState)
+    let pageNav = state.pageInit;
+    console.log(state)
     console.log(pageNav)
-    let validationLoad = readState.validationInit;
+    let validationLoad = state.validationInit;
 
     pageInitHolder = document.getElementById(pageNav);
     validationInitHolder = validationLoad;
@@ -64,17 +81,18 @@ export async function navigator() {
     let removePage = ''
     //remove page
     if (!(prevState == 'head')) {
-        console.log(readState)
-        // if (readState.fromStorage) return
+        console.log(prevState)
+        // if (state.fromStorage) return
         try {
             removePage = prevState.pageInit()
-            console.log(removePage)
+            // let removeId = removePage.getAttribute('id')
             let pageId
-            typeof(removePage) == 'object' ? pageId = document.getElementById(eval(removePage).getAttribute('id')) 
+            typeof(removePage) == 'object' ? pageId = document.getElementById(removePage.getAttribute('id')) 
             : pageId = document.getElementById(removePage)
             // let pageHolder = document.getElementById(removePage);
             console.log(pageId)
             pageId.remove()
+            // document.getElementById(removeId).remove()
         } catch (err) {
             console.log(err)
         }
@@ -85,18 +103,56 @@ export async function navigator() {
     //     pageInitHolder.remove()
     // }
 
-    //bring in the new page
-    if (!containerChild.contains(pageInitHolder)) {
-        //remove skeleton
-        const skeleton = document.getElementById('skeleton');
-        skeleton.innerHTML = '';
+    // if (pageNav !== prevState.pageInit) {}
+            //bring in the new page
+            if (!containerChild.contains(pageInitHolder)) { //this here
+                //remove skeleton
+                const skeleton = document.getElementById('skeleton');
+                skeleton.innerHTML = '';
 
-        console.log(pageNav)
-        //containerChild.innerHTML = pageNav()
-        containerChild.appendChild(pageNav())
-        animation_.pageAnimIn(pageNav().getAttribute("id"))
-        validationLoad()
-    }
+                try {
+                    console.log(pageNav)
+                    //containerChild.innerHTML = pageNav()
+                    containerChild.appendChild(pageNav())
+                    animation_.pageAnimIn(pageNav().getAttribute("id"))
+                    validationLoad()
+                    
+                    console.log(pageStore.currentPage)
+                    
+                    if (firstLoad) {
+                        firstLoad = false
+                    } else {
+                        //push details of next page from store to state
+                        tezzio.update(pageStore.currentPage.nextPage.page)
+
+                        //move pageStore to next page
+                        pageStore.nextPage()
+                    }
+
+                } catch (error) {
+                    console.log(error)
+                    let state = tezzio.get()
+
+                    if(error) {
+                        if (!firstLoad) {
+                            //reverse push details of next page from store to state
+                            //tezzio.update(pageStore.currentPage.prevPage.page)
+                        }
+
+                        console.log('error occured')
+                        console.log(tezzio.get())
+                        //reverse state to previous page
+                        console.log(pageStore.currentPage)
+                        // if (state.fromStorage == true) {
+                        //     tezzio.update(pageStore.currentPage.page)
+                        // } else {
+                        //     tezzio.update(pageStore.currentPage.prevPage.page)
+                        // }
+                        console.log(tezzio.get())
+                    }
+
+                }
+            }
 
     //stop the spinner
     if(spinner.getState()) {
@@ -104,8 +160,8 @@ export async function navigator() {
     }
 
     //notify manager
-    state.notifyManager()
+    tezzio.notifyManager()
 
 }
 
-let unsubscribe = state.joinNavList(navigator);
+let unsubscribe = tezzio.joinNavList(navigator);

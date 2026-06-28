@@ -4,6 +4,8 @@ function Page(page) {
     this.nextPage = null;
 }
 
+let subscribers = new Set()
+
 export function PageList() {
     this.head = new Page('head');
     this.findPage = findPage;
@@ -14,7 +16,10 @@ export function PageList() {
     this.nextPage = nextPage;
     this.prevPage = prevPage;
     this.currentPage = {};
+    this.updateCurrentPage = updateCurrentPage
+    this.updateNextPage = updateNextPage;
     this.display = display
+    this.subscribe = subscribe;
 }
 
 function findPage(page) {
@@ -75,6 +80,43 @@ function prevPage() {
     }
     this.currentPage = currentPage
     return currentPage.page
+}
+
+function subscribe(fn) {
+    console.log('pageStore subscriber added')
+    subscribers.add(fn) //we add a function to be called whenever there is an update to the current page
+}
+
+function updateNextPage(update, fn) {
+    try {
+            this.currentPage.nextPage.page = { ...this.currentPage.nextPage.page, ...update, ...{ updated: true }}
+            fn()
+            //  subscribers.forEach((subscriber) => {
+            //     try{
+            //         subscriber()
+            //     } catch(err) {
+            //         console.log(err)
+            //     }
+            //  }) 
+        } catch (error) {
+            console.log(error)
+        }
+}
+
+function updateCurrentPage(update) {
+    try {
+        this.currentPage.page = { ...this.currentPage.page, ...update, ...{ updated: true }}
+        // fn()
+        //  subscribers.forEach((subscriber) => {
+        //     try{
+        //         subscriber()
+        //     } catch(err) {
+        //         console.log(err)
+        //     }
+        //  }) 
+    } catch (error) {
+        console.log(error)
+    }
 }
 
 function display() {

@@ -5,6 +5,8 @@ import { pageState } from "../helpers/pageState.js";
 import { pageStore } from "../helpers/pageStore.js";
 import { infoPageStore } from "../helpers/pageStore.js";
 
+let tezzio = pageState
+
 function infoValidation () {
     console.log('hi')
     // const formControl = document.getElementById('formId')
@@ -60,11 +62,12 @@ function infoValidation () {
         }
 
         if ((validatePhone.isValid == true) && (validateEmail.isValid == true)) {
+            tezzio.notifyLoaderList()
             //update validation in state to true
             let state = pageState.get()
             console.log(pageStore.currentPage.page.pageId, infoPageStore.pageId)
             if (pageStore.currentPage.page.pageId == infoPageStore.pageId) {
-                state.validated = true
+                tezzio.update({validated:  true})
                 console.log('id correct', state)
             }
 

@@ -28,13 +28,14 @@ const skeletonSection = `<section class="anim">
           </div>
         </section>`;
 
-//console.log(skeletonHold)
+{/* console.log(skeletonHold) */}
 
 export default async function plansLoader() {
     //append the skeleton
-    if((spinner.getState()) && (state.loaded == true)) {
-      //const skeletonHold = document.getElementById('skeleton');
-      //skeletonHold.innerHTML = skeletonSection;
+    
+    if(!(spinner.getState()) && (state.loaded == false)) {
+      const skeletonHold = document.getElementById('skeleton');
+      skeletonHold.innerHTML = skeletonSection;
     }
 
     //this should await import of the page and validation

@@ -29,4 +29,8 @@ export function pageStateHelper() {
     // })
     //send a notification to loader to load the current page
     tezzio.notifyLoaderList();
+
+    //add this entire block of code to manager
+    //encapsulate it in a condition, so it runs only once-on first-load
+    //then manager should handle updating pageStore to next page
 }
