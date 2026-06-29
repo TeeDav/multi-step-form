@@ -1,9 +1,17 @@
 import { addOnId } from "../components/addOn.js"
+import { pageState } from "../helpers/pageState.js";
 import { setReady, unsetReady } from "./validationState.js"
 
-export function addonValidation() {
-    const addOn = document.querySelectorAll(`#${addOnId}`)
+const tezzio = pageState
 
+export function addonValidation() {
+
+    let addOn = document.querySelectorAll(`#${addOnId}`)
+
+    let dispatchReady = false
+    let dispatched = false
+    let b = addOn.length
+    let a = 0
     console.log(addOn)
 
     addOn.forEach(addon => {
@@ -13,31 +21,29 @@ export function addonValidation() {
         })
     })
 
-    let dispatchReady = false
-    let dispatched = false
-    let b = addOn.length
-    let a = 0
-    console.log(addOn)
-
     document.addEventListener('addonPageReady', () => {
+        let addOn = document.querySelectorAll(`#${addOnId}`)
+        console.log(addOn)
         addOn.forEach(addon => {
             console.log(addon)
 
             if (!addon.classList.contains('focused')) {
                 a = a + 1;
-            }
-
-            if (addon.classList.contains('focused')) {
+            } else {
                 if (dispatched == true) return
                 // dispatchReady = true
 
-                console.log('should fire');
+                // console.log('should fire');
 
-                const id = crypto.randomUUID();
-                console.log(id)
-                setReady(id);
+                // const id = crypto.randomUUID();
+                // console.log(id)
+                // setReady(id);
 
-                window.dispatchEvent(new CustomEvent('nextPageReady', { detail: { id }}))
+                // window.dispatchEvent(new CustomEvent('nextPageReady', { detail: { id }}))
+
+                //validation is true here, update state
+                tezzio.update({validated: true})
+                tezzio.notifyLoaderList()
 
                 dispatched = true
             }
@@ -49,6 +55,10 @@ export function addonValidation() {
             a = 0
             unsetReady()
             dispatched = false
+
+            //validation is false here, update state
+            tezzio.update({validated: false})
+            // tezzio.notifyLoaderList()
         }
 
         a = 0;

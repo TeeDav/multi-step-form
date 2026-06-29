@@ -49,7 +49,7 @@ export async function navigator() {
     createSignal()
 
     //page to be added
-    let state = pageStore.currentPage.nextPage.page
+    let state = pageStore.currentPage.nextPage?.page
     console.log(state)
 
     if (firstLoad) {

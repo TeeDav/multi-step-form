@@ -20,9 +20,9 @@ const pageState = {
     nextPageInit: ''
 }
 
-export const infoPageStore = {
-    pageName: 'infoPage',
-    pageId: '#0034abc45',
+ const addonsStore = {
+    pageName: 'addonPage',
+    pageId: '#0256t13qu',
     hasValidation: true,
     validateOn: 'focusOut',
     validated: false,
@@ -30,15 +30,14 @@ export const infoPageStore = {
     loaded: false,
     loading: false,
     currentPage: false,
-    pageLoaderName: 'infoPageLoader',
-    importPath: "../preLoaders/infoPreLoader.js", //loader
+    pageLoaderName: 'addonsPageLoader',
+    importPath: "../preLoaders/addonsPreLoader.js", //loader
     pageInit: "", //navigator
     validationInit: '', //navigator
-    nextPage: 'plansPageStore',
-    nextPageId: 'plansPageStore.pageId',
-    nextPagePath: 'plansPageStore.importPath', //'loader' uses this to lazy load
-    nextPageInit: '' //'loader' stores loaded module here, and navigator should use this to mount stuff
-                    //for the next page when user clicks 'next'
+    nextPage: 'addons',
+    // nextPageId: 'addons.pageId',
+    // nextPagePath: 'addons.importPath', //'loader' uses this to lazy load
+    // nextPageInit: '' //'loader' stores loaded module here, and navigator should use this to mount stuff
 }
 
  const plansPageStore = {
@@ -55,15 +54,15 @@ export const infoPageStore = {
     importPath: "../preLoaders/plansPreLoader.js", //loader
     pageInit: "", //navigator
     validationInit: '', //navigator
-    nextPage: 'addons',
-    nextPageId: 'addons.pageId',
-    nextPagePath: 'addons.importPath', //'loader' uses this to lazy load
-    nextPageInit: '' //'loader' stores loaded module here, and navigator should use this to mount stuff
+    nextPage: addonsStore
+    // nextPageId: 'addons.pageId',
+    // nextPagePath: 'addons.importPath', //'loader' uses this to lazy load
+    // nextPageInit: '' //'loader' stores loaded module here, and navigator should use this to mount stuff
 }
 
- const addonsStore = {
-    pageName: 'addonPage',
-    pageId: '#0256rdf89',
+export const infoPageStore = {
+    pageName: 'infoPage',
+    pageId: '#0034abc45',
     hasValidation: true,
     validateOn: 'focusOut',
     validated: false,
@@ -71,14 +70,15 @@ export const infoPageStore = {
     loaded: false,
     loading: false,
     currentPage: false,
-    pageLoaderName: 'plansPageLoader',
-    importPath: "./fg.js", //loader
+    pageLoaderName: 'infoPageLoader',
+    importPath: "../preLoaders/infoPreLoader.js", //loader
     pageInit: "", //navigator
     validationInit: '', //navigator
-    nextPage: 'addons',
-    nextPageId: 'addons.pageId',
-    nextPagePath: 'addons.importPath', //'loader' uses this to lazy load
-    nextPageInit: '' //'loader' stores loaded module here, and navigator should use this to mount stuff
+    nextPage: plansPageStore
+    // nextPageId: plansPageStore.pageId,
+    // nextPagePath: 'plansPageStore.importPath', //'loader' uses this to lazy load
+    // nextPageInit: '' //'loader' stores loaded module here, and navigator should use this to mount stuff
+    //                 //for the next page when user clicks 'next'
 }
 
 

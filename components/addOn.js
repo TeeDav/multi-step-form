@@ -74,6 +74,7 @@ export function addOn([headNote, subNote, perMonth, perYear]) {
 
     checkInput.addEventListener('click', (e) => {
         console.log(checkInput.parentElement.parentElement)
+        checkInput.checked = !checkInput.checked
         // const addOnCheck = checkInput.parentElement.parentElement
         // if (addOnCheck.classList.contains('focused')) {
         //     addOnCheck.classList.remove('focused');
@@ -82,7 +83,7 @@ export function addOn([headNote, subNote, perMonth, perYear]) {
         //     addOnCheck.classList.add('focused');
         // }
         //checkInput.checked = !checkInput.checked
-    })
+    }, true)
 
     if (checkInput.checked == true) {
         console.log('checked')
